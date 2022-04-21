@@ -1,0 +1,20 @@
+.info_image {
+  position: relative;
+  cursor: pointer;
+}
+
+.icon_delete{
+    position: absolute;
+    cursor: pointer;
+    top: -5px;
+    right: 3px;
+    color: red;
+}
+.layout-dashboard .ant-card {
+  border-radius: 12px;
+  box-shadow: 1px 20px 27px 20px rgb(0 0 0 / 5%) !important;
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+}
