@@ -12,9 +12,13 @@ import {
 import { FormInstance } from "rc-field-form";
 import React, { useEffect, useRef, useState } from "react";
 import { postEditProductByIdAdmin } from "../../../../features/admin/productAdnim";
+import { getAllPromotionAdmin } from "../../../../features/admin/promotion";
 import "../../../assets/css/cssGlobal/style.css";
 import { useAppDispatch, useAppSelector } from "../../../commom/hooks";
-import { categoryAdminStore } from "../../../commom/use-selector";
+import {
+  categoryAdminStore,
+  promotionAdminStore,
+} from "../../../commom/use-selector";
 import { Product } from "../../../types/product";
 import { openNotification } from "../../Notifi/noti";
 
@@ -31,13 +35,22 @@ function ModalProduct(props: propsModalProduct) {
   const formRef: any = React.createRef<FormInstance>();
   const { Option } = Select;
   const categorys = useAppSelector(categoryAdminStore);
-
+  const promotion = useAppSelector(promotionAdminStore);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   useEffect(() => {
     form.resetFields();
     // setFileIMG(props.value.image);
   }, [props.value.id]);
+
+  useEffect(() => {
+    dispatch(
+      getAllPromotionAdmin({
+        page: 0,
+        noitem: 0,
+      })
+    );
+  }, []);
 
   function onFinish(value: any) {
     console.log(value);
@@ -219,7 +232,36 @@ function ModalProduct(props: propsModalProduct) {
             ))}
           </Select>
         </Form.Item>
-        {/* {acc.listuser.permission === "1" ? ( */}
+
+        <Form.Item
+          label="Khuyến mại "
+          name="id_promotion"
+          rules={[{ required: true, message: "Chọn khuyến mại!" }]}
+        >
+          <Select
+            showSearch
+            size="large"
+            placeholder="Chọn khuyến mại"
+            optionFilterProp="children"
+            onChange={onChange}
+            onSearch={onSearch}
+            style={{ minWidth: "60px", marginRight: "props.pageSizepx" }}
+            filterOption={(input, option: any) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+            filterSort={(optionA: any, optionB: any) =>
+              optionA.children
+                .toLowerCase()
+                .localeCompare(optionB.children.toLowerCase())
+            }
+          >
+            {promotion.listpromotion.map((item) => (
+              <Option value={item.id} key={item.id}>
+                {item.Promotion_name}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
         <Form.Item
           label="Mã "
           name="productcode"
@@ -238,9 +280,9 @@ function ModalProduct(props: propsModalProduct) {
         </Form.Item>
 
         <Form.Item
-          label="SL "
-          name="quantily"
-          rules={[{ required: true, message: "Nhập số lượng!" }]}
+          label="Giá gốc "
+          name="price_origin"
+          rules={[{ required: true, message: "Nhập giá!" }]}
         >
           <InputNumber
             maxLength={25}
@@ -254,36 +296,21 @@ function ModalProduct(props: propsModalProduct) {
         </Form.Item>
 
         <Form.Item
-          label="Giá "
-          name="price"
-          rules={[{ required: true, message: "Nhập giá sản phẩm!" }]}
+          label="Giá bán "
+          name="price_sale"
+          rules={[{ required: true, message: "Nhập giá!" }]}
         >
           <InputNumber
             maxLength={25}
-            size="large"
             style={{ width: "100%" }}
             formatter={(value: any) =>
               `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }
+            size="large"
             parser={(value: any) => value.replace(/\$\s?|(,*)/g, "")}
           />
         </Form.Item>
 
-        <Form.Item
-          label="Hoàn tiền"
-          name="refund"
-          rules={[{ required: true, message: "Nhập số tiền hoàn lại!" }]}
-        >
-          <InputNumber
-            maxLength={25}
-            size="large"
-            style={{ width: "100%" }}
-            formatter={(value: any) =>
-              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }
-            parser={(value: any) => value.replace(/\$\s?|(,*)/g, "")}
-          />
-        </Form.Item>
 
         {/* <Form.Item
           wrapperCol={{ offset: props.value?.id > 0 ? 3 : 3, span: 24 }}

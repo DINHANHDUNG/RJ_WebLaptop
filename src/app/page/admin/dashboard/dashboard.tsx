@@ -71,11 +71,6 @@ function Dashboard() {
       width: "10%",
       render: (text: any, row: any, index: any) => index + 1,
     },
-    // {
-    //   title: "Mã sản phẩm",
-    //   dataIndex: "productcode",
-    //   key: "productcode",
-    // },
     {
       title: "Danh mục",
       dataIndex: "category",
