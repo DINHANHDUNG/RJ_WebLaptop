@@ -1,32 +1,40 @@
-import { Button, Card, Col, Popconfirm, Row, Table, Typography } from "antd";
+import { Button, Card, Col, Pagination, Popconfirm, Row, Table } from "antd";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import {
-  getAllCategoryAdmin,
-  postDeleteCategoryAdmin,
-} from "../../../../features/admin/categoryAdnim";
-import { useAppDispatch, useAppSelector } from "../../../commom/hooks";
-import { categoryAdminStore } from "../../../commom/use-selector";
-import ModalCategory from "../../../component/modal/Category/modal-category";
+  getAllPromotionAdmin,
+  postDeletePromotionAdmin,
+} from "../../../../features/admin/promotion";
+import {
+  getParsedDate,
+  useAppDispatch,
+  useAppSelector,
+} from "../../../commom/hooks";
+import { promotionAdminStore } from "../../../commom/use-selector";
+import ModalPromotion from "../../../component/modal/Promotion/modal-promotion";
 
-function Category() {
-  const { Title, Text } = Typography;
-
+function Promotion() {
   const dispatch = useAppDispatch();
-  const category = useAppSelector(categoryAdminStore);
+  const promotion = useAppSelector(promotionAdminStore);
 
-  const [listCategory, setListCategory] = useState(() => category.listcategory);
   const [selected, setSelected] = useState([] as any);
   const [selectedID, setSelectedID] = useState([] as any);
 
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState({
     id: 0,
-    id_parent: 0,
-    categoryname: "",
-  });
+  } as any);
+
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
-    dispatch(getAllCategoryAdmin());
+    dispatch(
+      getAllPromotionAdmin({
+        page: page,
+        noitem: pageSize,
+      })
+    );
   }, []);
 
   // table code start
@@ -37,28 +45,48 @@ function Category() {
       key: "id",
       width: "10%",
       render: (text: any, row: any, index: any) => index + 1,
-      // render: (id: any ) => (
-      //   <>
-      //     {id}
-      //   </>
-      // )
     },
 
-    // {
-    //     title: "Danh mục cha",
-    //     key: "customer",
-    //     dataIndex: "customer",
-    //     render: (customer: any) => <>{customer.username}</>,
-    //     sorter: (a: any, b: any) =>
-    //       a.customer.username.localeCompare(b.customer.username),
-    //     // sortDirections: ['descend']
-    //   },
+    {
+      title: "Tên KM",
+      dataIndex: "Promotion_name",
+      key: "Promotion_name",
+      sorter: (a: any, b: any) =>
+        a.Promotion_name.localeCompare(b.Promotion_name),
+    },
 
     {
-      title: "Tên danh mục",
-      dataIndex: "categoryname",
-      key: "categoryname",
-      sorter: (a: any, b: any) => a.categoryname.localeCompare(b.categoryname),
+      title: "Ngày tạo",
+      dataIndex: "created_date",
+      key: "created_date",
+      render: (created_date: any) => (
+        <div style={{ whiteSpace: "nowrap" }}>
+          {getParsedDate(created_date)}
+        </div>
+      ),
+      sorter: (a: any, b: any) => {
+        if (moment(a.Created).isBefore(moment(b.Created))) {
+          return -1;
+        }
+        return 1;
+      },
+    },
+
+    {
+      title: "Ngày tạo",
+      dataIndex: "updated_date",
+      key: "updated_date",
+      render: (updated_date: any) => (
+        <div style={{ whiteSpace: "nowrap" }}>
+          {getParsedDate(updated_date)}
+        </div>
+      ),
+      sorter: (a: any, b: any) => {
+        if (moment(a.Created).isBefore(moment(b.Created))) {
+          return -1;
+        }
+        return 1;
+      },
     },
 
     {
@@ -90,7 +118,7 @@ function Category() {
           <Card
             bordered={false}
             className="criclebox tablespace mb-24"
-            title="Quản lý danh mục"
+            title="Quản lý khuyến mại"
             extra={
               <>
                 <Button
@@ -98,8 +126,6 @@ function Category() {
                   onClick={() => {
                     setValue({
                       id: 0,
-                      id_parent: 0,
-                      categoryname: "",
                     });
                     setVisible(true);
                   }}
@@ -112,8 +138,14 @@ function Category() {
                   okText="Có"
                   cancelText="Không"
                   onConfirm={() =>
-                    dispatch(postDeleteCategoryAdmin({ id: selectedID })).then(
-                      () => dispatch(getAllCategoryAdmin())
+                    dispatch(postDeletePromotionAdmin({ id: selectedID })).then(
+                      () =>
+                        dispatch(
+                          getAllPromotionAdmin({
+                            page: page,
+                            noitem: pageSize,
+                          })
+                        )
                     )
                   }
                 >
@@ -125,7 +157,7 @@ function Category() {
             <div className="table-responsive">
               <Table
                 columns={columns}
-                dataSource={category.listcategory.filter(
+                dataSource={promotion.listpromotion.filter(
                   (item: any) => item.id != 0
                 )}
                 pagination={false}
@@ -134,7 +166,7 @@ function Category() {
                   ...rowSelection,
                 }}
                 rowKey="id"
-                onRow={(record, rowIndex) => {
+                onRow={(record: any, rowIndex) => {
                   return {
                     onClick: (event) => {}, // click row
                     onDoubleClick: (event) => {
@@ -142,7 +174,7 @@ function Category() {
                     }, // double click row
                     onContextMenu: (event) => {}, // right button click row
                     onMouseEnter: (event) => {
-                      console.log(record);
+                      // console.log(record);
                       setValue(record);
                     }, // mouse enter row
                     onMouseLeave: (event) => {}, // mouse leave row
@@ -153,8 +185,35 @@ function Category() {
           </Card>
         </Col>
       </Row>
+      <Row gutter={[24, 24]}>
+        <Col xl={24}>
+          <Pagination
+            style={{
+              marginTop: "10px",
+              float: "right",
+              marginBottom: "10px",
+            }}
+            onChange={(page, pageSizeNew) => {
+              console.log(page, pageSizeNew);
+              setPage(page);
+              dispatch(
+                getAllPromotionAdmin({
+                  page: page,
+                  noitem: pageSizeNew ? pageSizeNew : pageSize,
+                })
+              );
+              if (pageSizeNew) {
+                setPageSize(pageSizeNew);
+              }
+            }}
+            pageSize={pageSize}
+            current={page}
+            total={promotion.total}
+          />
+        </Col>
+      </Row>
       {visible && (
-        <ModalCategory
+        <ModalPromotion
           visible={visible}
           toggle={() => {
             setVisible(false);
@@ -166,4 +225,4 @@ function Category() {
   );
 }
 
-export default Category;
+export default Promotion;

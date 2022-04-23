@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../../commom/hooks";
 function Sidenav({ color }: any) {
   const { pathname } = useLocation();
   const page = pathname.replace("/", "");
-//   const permission = useAppSelector(accountAdminStore);
+  //   const permission = useAppSelector(accountAdminStore);
   console.log(page);
 
   const dashboard = [
@@ -122,7 +122,7 @@ function Sidenav({ color }: any) {
     <>
       <div className="brand-admin">
         {/* <img src={logo} alt="" /> */}
-        <span> Admin</span>
+        <span style={{ fontWeight: "600" }}> Admin</span>
       </div>
       <hr />
       <Menu theme="light" mode="inline">
@@ -139,19 +139,46 @@ function Sidenav({ color }: any) {
             <span className="label">Sản phẩm</span>
           </NavLink>
         </Menu.Item>
-          <Menu.Item key="2">
-            <NavLink to="/admin/category">
-              <span
-                className="icon"
-                style={{
-                  background: page === "admin/category" ? color : "",
-                }}
-              >
-                {Category}
-              </span>
-              <span className="label">Danh mục</span>
-            </NavLink>
-          </Menu.Item>
+        <Menu.Item key="2">
+          <NavLink to="/admin/category">
+            <span
+              className="icon"
+              style={{
+                background: page === "admin/category" ? color : "",
+              }}
+            >
+              {Category}
+            </span>
+            <span className="label">Danh mục</span>
+          </NavLink>
+        </Menu.Item>
+
+        <Menu.Item key="3">
+          <NavLink to="/admin/categoryproduct">
+            <span
+              className="icon"
+              style={{
+                background: page === "admin/categoryproduct" ? color : "",
+              }}
+            >
+              {Category}
+            </span>
+            <span className="label">Danh mục SP</span>
+          </NavLink>
+        </Menu.Item>
+        <Menu.Item key="4">
+          <NavLink to="/admin/promotion">
+            <span
+              className="icon"
+              style={{
+                background: page === "admin/promotion" ? color : "",
+              }}
+            >
+              {Category}
+            </span>
+            <span className="label">Khuyến mại</span>
+          </NavLink>
+        </Menu.Item>
 
         {/* <Menu.Item key="3">
           <NavLink to="/admin/product">
@@ -195,7 +222,6 @@ function Sidenav({ color }: any) {
               <span className="label">shop</span>
             </NavLink>
           </Menu.Item> */}
-
       </Menu>
     </>
   );

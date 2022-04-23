@@ -1,10 +1,21 @@
 import { Badge, Button, Col, Dropdown, List, Row, Typography } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { LogoutOutlined, UnlockOutlined } from "@ant-design/icons";
 import { profile, toggler } from "../../../assets/icon/iconsvg";
+import {
+  ChangePassAdmin,
+  postLogoutAdmin,
+} from "../../../../features/admin/accountAdmin";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../../commom/hooks";
+import { accountAdminStore } from "../../../commom/use-selector";
+import ModalChangePass from "../../modal/ChangePassword/modal-changepass";
 function Headeradmin({ placement, name, subName, onPress }: any) {
+  const dispatch = useDispatch();
   const { Title, Text } = Typography;
+  const [visible, setVisible] = useState(false);
+  const acc = useAppSelector(accountAdminStore);
   const datause = [
     {
       title: "Đổi mật khẩu",
@@ -27,11 +38,11 @@ function Headeradmin({ placement, name, subName, onPress }: any) {
           onClick={() => {
             console.log(item.title);
             if (item.title === "Đăng xuất") {
-              // dispatch(postLogoutAdmin());
+              dispatch(postLogoutAdmin());
             }
 
             if (item.title === "Đổi mật khẩu") {
-              // setVisible(true);
+              setVisible(true);
             }
           }}
         >
@@ -90,6 +101,26 @@ function Headeradmin({ placement, name, subName, onPress }: any) {
           </Dropdown>
         </Col>
       </Row>
+
+      <ModalChangePass
+        visible={visible}
+        toggle={() => {
+          setVisible(false);
+        }}
+        toggleChangePass={(value: {
+          newpassword: String;
+          oldpassword: String;
+        }) => {
+          console.log(value);
+          dispatch(
+            ChangePassAdmin({
+              id: Number(acc.listuser.id),
+              oldpassword: value.oldpassword.toString(),
+              newpassword: value.newpassword.toString(),
+            })
+          );
+        }}
+      />
     </div>
   );
 }
