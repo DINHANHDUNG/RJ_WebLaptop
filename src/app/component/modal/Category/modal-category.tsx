@@ -84,7 +84,7 @@ function ModalCategory(props: propsModalCategory) {
         autoComplete="off"
       >
         <Form.Item
-          label="Danh mục "
+          label="Danh mục cha"
           name="idcategory"
           // rules={[{ required: true, message: "Chọn danh mục!" }]}
         >

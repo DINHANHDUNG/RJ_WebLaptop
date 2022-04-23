@@ -17,6 +17,8 @@ export interface Product {
   promotion: Promotion;
   promotiondetails: promotiondetails;
   promotionimages: [string];
+  productimages: [string];
+  productdetails: any;
 }
 
 export interface AddProduct {
@@ -30,13 +32,13 @@ export interface AddProduct {
   describe: string;
 }
 
-export type EditCategory = AddProduct & { id: number };
+export type EditProduct = AddProduct & { id: number };
 
 export interface DeleteProduct {
   id: Array<Number>;
 }
 export interface CustomesProduct {
-  listproduct: Product;
+  listproduct: Array<Product>;
   total: number;
   loading: boolean;
   error: boolean;
