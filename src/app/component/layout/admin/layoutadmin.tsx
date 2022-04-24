@@ -20,6 +20,9 @@ function LayoutAdmin() {
   }, []);
 
   const acc = useAppSelector(accountAdminStore);
+  // const acc = {
+  //   token: 'âs'
+  // }
   function PrivateRoute({ children }: any) {
     const auth = acc.token ? true : false;
     return auth ? children : <Navigate to="loginadmin" />;

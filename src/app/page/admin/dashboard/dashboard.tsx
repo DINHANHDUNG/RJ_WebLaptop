@@ -53,8 +53,8 @@ function Dashboard() {
         setValueInputSelect(res.payload.result[0].id);
         dispatch(
           getAllProductAdmin({
-            // id_category: res.payload.result[0].id,
-            id_category: 0,
+            id_category: res.payload.result[0].id,
+            // id_category: 0,
             page: page,
             noitem: pageSize,
           })

@@ -9,18 +9,28 @@ import {
   Row,
   Select,
 } from "antd";
+
+import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { FormInstance } from "rc-field-form";
 import React, { useEffect, useRef, useState } from "react";
-import { postEditProductByIdAdmin } from "../../../../features/admin/productAdnim";
+import {
+  getAllProductAdmin,
+  postAddProductByIdAdmin,
+  postEditProductByIdAdmin,
+} from "../../../../features/admin/productAdnim";
 import { getAllPromotionAdmin } from "../../../../features/admin/promotion";
 import "../../../assets/css/cssGlobal/style.css";
 import { useAppDispatch, useAppSelector } from "../../../commom/hooks";
 import {
   categoryAdminStore,
+  categoryProductAdminStore,
   promotionAdminStore,
 } from "../../../commom/use-selector";
 import { Product } from "../../../types/product";
+import CkeditorCpn from "../../CkEditor/ckeditorCpn";
 import { openNotification } from "../../Notifi/noti";
+import { getAllCategoryProductAdmin } from "../../../../features/admin/categoryProductAdnim";
+import uploadIMGAdminAPI from "../../../commom/api/UploadIMG/upload";
 
 interface propsModalProduct {
   visible: boolean;
@@ -36,11 +46,12 @@ function ModalProduct(props: propsModalProduct) {
   const { Option } = Select;
   const categorys = useAppSelector(categoryAdminStore);
   const promotion = useAppSelector(promotionAdminStore);
+  const categoryproduct = useAppSelector(categoryProductAdminStore);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   useEffect(() => {
     form.resetFields();
-    // setFileIMG(props.value.image);
+    setFileIMG(props.value.productimages);
   }, [props.value.id]);
 
   useEffect(() => {
@@ -50,69 +61,85 @@ function ModalProduct(props: propsModalProduct) {
         noitem: 0,
       })
     );
+
+    dispatch(
+      getAllCategoryProductAdmin({
+        page: 0,
+        noitem: 0,
+      })
+    );
   }, []);
 
   function onFinish(value: any) {
     console.log(value);
-    // if (fileIMG && fileIMG.length > 0) {
-    //   if (props.value.id > 0) {
-    //     // Sửa
-    //     console.log("Sửa", value);
-    //     dispatch(
-    //       postEditProductByIdAdmin({
-    //         id: props.value.id,
-    //         image: fileIMG,
-    //         productcode: value.productcode ? value.productcode : "",
-    //         linkshop: value.linkshop ? value.linkshop : "",
-    //         linkaffiliate: value.linkaffiliate ? value.linkaffiliate : "",
-    //         price: Number(value.price),
-    //         refund: Number(value.refund),
-    //         quantily: Number(value.quantily),
-    //       })
-    //     ).then((res) => {
-    //       dispatch(
-    //         getAllProductByCategoryAdmin({
-    //           idcategory: 0,
-    //           page: props.page,
-    //           noitem: props.pageSize,
-    //         })
-    //       );
-    //       props.toggle();
-    //     });
-    //   } else {
-    //     // Thêm
-    //     dispatch(
-    //       postAddProductByIdAdmin({
-    //         ...value,
-    //         image: fileIMG,
-    //         linkshop: value.linkshop ? value.linkshop : "",
-    //         linkaffiliate: value.linkaffiliate ? value.linkaffiliate : "",
-    //         idshop:
-    //           acc.listuser.permission === "1"
-    //             ? value.idshop
-    //             : acc.listuser.shops[0].id,
-    //         price: Number(value.price),
-    //         refund: Number(value.refund),
-    //         quantily: Number(value.quantily),
-    //       })
-    //     ).then(() => {
-    //       dispatch(
-    //         getAllProductByCategoryAdmin({
-    //           // idcategory: 0,
-    //           page: props.page,
-    //           noitem: props.pageSize,
-    //         })
-    //       );
 
-    //       props.toggle();
-    //     });
-    //   }
-    // } else {
-    //   openNotification({
-    //     message: "Chọn ảnh",
-    //     type: "error",
-    //   });
-    // }
+    let arrIMG = [] as any;
+
+    fileIMG.map((val: any, idx: any) => {
+      console.log(idx);
+      if (idx === 0) {
+        arrIMG.push({
+          imagename: val,
+          type: 1,
+        });
+      } else {
+        arrIMG.push({
+          imagename: val,
+          type: 2,
+        });
+      }
+    });
+
+    console.log(arrIMG);
+    if (arrIMG.length > 0) {
+      if (props.value.id > 0) {
+        // Sửa
+        console.log("Sửa", value);
+        dispatch(
+          postEditProductByIdAdmin({
+            ...value,
+            id: props.value.id,
+            price_sale: Number(value.price_sale),
+            price_origin: Number(value.price_origin),
+            productimages: arrIMG,
+          })
+        ).then((res) => {
+          dispatch(
+            getAllProductAdmin({
+              id_category: props.valueInputSelect,
+              page: props.page,
+              noitem: props.pageSize,
+            })
+          );
+          props.toggle();
+        });
+      } else {
+        // Thêm
+        dispatch(
+          postAddProductByIdAdmin({
+            ...value,
+            price_sale: Number(value.price_sale),
+            price_origin: Number(value.price_origin),
+            productimages: arrIMG,
+          })
+        ).then(() => {
+          dispatch(
+            getAllProductAdmin({
+              id_category: props.valueInputSelect,
+              page: props.page,
+              noitem: props.pageSize,
+            })
+          );
+
+          props.toggle();
+        });
+      }
+    } else {
+      openNotification({
+        message: "Chọn ảnh",
+        type: "error",
+      });
+    }
   }
 
   function onChange(value: any) {
@@ -129,47 +156,58 @@ function ModalProduct(props: propsModalProduct) {
 
   //Xử lý ảnh
   const inputRef = useRef(null as any);
-  const [fileIMG, setFileIMG] = useState(String);
+  const [fileIMG, setFileIMG] = useState([] as any);
   const [uploading, setUploading] = useState(false);
 
-  function deleteIMG() {
+  console.log(fileIMG);
+
+  function deleteIMG(value: any) {
     console.log("Đang xóa");
 
-    // if (fileIMG.split(".").length > 1) {
-    //   uploadIMGAdminAPI
-    //     .postDeleteIMG({
-    //       imageName: fileIMG,
-    //     })
-    //     .then((res) => {
-    //       console.log("Thành công");
-    //     });
-    // }
-    setFileIMG("");
+    if (value.split(".").length > 1) {
+      uploadIMGAdminAPI
+        .postDeleteIMG({
+          imageName: value,
+        })
+        .then((res) => {
+          console.log("Thành công");
+        });
+    }
+    setFileIMG((pre: any) => {
+      console.log(pre);
+
+      return [pre.filter((values: any) => values != value)];
+    });
   }
 
   function onchangeIMG(e: any) {
+    console.log(e.target.files);
+
     console.log(e.target.files[0]);
-    const data = new FormData();
-    data.append("image", e.target.files[0]);
-    setUploading(true);
-    // uploadIMGAdminAPI
-    //   .postUploadIMG(data)
-    //   .then((res) => {
-    //     setFileIMG(res.data.data.imageName);
-    //     console.log(res.data.data.imageName);
-    //     console.log(res.data.data.imageUrl);
-    //     setUploading(false);
-    //   })
-    //   .catch((err) => {
-    //     console.log("Lỗi upload");
-    //     setUploading(false);
-    //     setFileIMG("");
-    //   });
+
+    for (let index = 0; index < e.target.files.length; index++) {
+      uploadImage(e.target.files[index]);
+    }
   }
 
-  const handleOentFileInput = () => {
-    inputRef?.current.click();
-  };
+  function uploadImage(e: any) {
+    const data = new FormData();
+    data.append("image", e);
+    setUploading(true);
+    uploadIMGAdminAPI
+      .postUploadIMG(data)
+      .then((res) => {
+        // setFileIMG(res.data.data.imageName);
+        console.log(res.data.data.imageName);
+        console.log(res.data.data.imageUrl);
+        setFileIMG((pre: any) => [...pre, res.data.data.imageName]);
+        setUploading(false);
+      })
+      .catch((err) => {
+        console.log("Lỗi upload");
+        setUploading(false);
+      });
+  }
 
   return (
     <Modal
@@ -178,139 +216,273 @@ function ModalProduct(props: propsModalProduct) {
       visible={props.visible}
       onOk={() => props.toggle()}
       onCancel={() => props.toggle()}
-      width={800}
+      width={"80%"}
       footer={null}
     >
       <Form
         ref={formRef}
         name="basic"
-        labelCol={{ span: 3 }}
+        // labelCol={{ span: 3 }}
         form={form}
+        layout="vertical"
         // wrapperCol={{ span: 16 }}
-        initialValues={
-          {
-            // idcategory: props.value.idcategory,
-            // idshop: props.value.idshop,
-            // productcode: props.value.productcode,
-            // productname: props.value.productname,
-            // quantily: props.value.quantily,
-            // linkaffiliate: props.value.linkaffiliate,
-            // linkshop: props.value.linkshop,
-            // price: props.value.price,
-            // refund: props.value.refund,
-          }
-        }
+        initialValues={{
+          id_category: props.value.id_category,
+          id_promotion: props.value.id_promotion,
+          id_dmsps: props.value.id_dmsps,
+          productcode: props.value.productcode,
+          productname: props.value.productname,
+          configuration: props.value.configuration,
+          describe: props.value.describe,
+          price_sale: props.value.price_sale,
+          price_origin: props.value.price_origin,
+          productdetails: props.value.productdetails,
+        }}
         onFinish={onFinish}
         autoComplete="off"
       >
-        <Form.Item
-          label="Danh mục "
-          name="idcategory"
-          rules={[{ required: true, message: "Chọn danh mục!" }]}
-        >
-          <Select
-            showSearch
-            size="large"
-            placeholder="Chọn danh mục"
-            optionFilterProp="children"
-            onChange={onChange}
-            onSearch={onSearch}
-            style={{ minWidth: "60px", marginRight: "props.pageSizepx" }}
-            filterOption={(input, option: any) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-            filterSort={(optionA: any, optionB: any) =>
-              optionA.children
-                .toLowerCase()
-                .localeCompare(optionB.children.toLowerCase())
-            }
-          >
-            {valueSelect.map((item) => (
-              <Option value={item.id} key={item.id}>
-                {item.categoryname}
-              </Option>
-            ))}
-          </Select>
-        </Form.Item>
+        <Row gutter={[8, 0]}>
+          <Col md={8} xs={24}>
+            <Form.Item
+              label="DM"
+              name="id_category"
+              rules={[{ required: true, message: "Chọn danh mục!" }]}
+            >
+              <Select
+                showSearch
+                size="large"
+                placeholder="Chọn danh mục"
+                optionFilterProp="children"
+                onChange={onChange}
+                onSearch={onSearch}
+                style={{ minWidth: "60px", marginRight: "props.pageSizepx" }}
+                filterOption={(input, option: any) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+                filterSort={(optionA: any, optionB: any) =>
+                  optionA.children
+                    .toLowerCase()
+                    .localeCompare(optionB.children.toLowerCase())
+                }
+              >
+                {valueSelect.map((item) => (
+                  <Option value={item.id} key={item.id}>
+                    {item.categoryname}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+
+          <Col md={8} xs={24}>
+            <Form.Item
+              label="KM"
+              name="id_promotion"
+              rules={[{ required: true, message: "Chọn khuyến mại!" }]}
+            >
+              <Select
+                showSearch
+                size="large"
+                placeholder="Chọn khuyến mại"
+                optionFilterProp="children"
+                onChange={onChange}
+                onSearch={onSearch}
+                style={{ minWidth: "60px", marginRight: "props.pageSizepx" }}
+                filterOption={(input, option: any) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+                filterSort={(optionA: any, optionB: any) =>
+                  optionA.children
+                    .toLowerCase()
+                    .localeCompare(optionB.children.toLowerCase())
+                }
+              >
+                {promotion.listpromotion.map((item) => (
+                  <Option value={item.id} key={item.id}>
+                    {item.Promotion_name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+
+          <Col md={8} xs={24}>
+            <Form.Item
+              label="DMSP"
+              name="id_dmsps"
+              rules={[{ required: true, message: "Chọn danh mục sản phẩm!" }]}
+            >
+              <Select
+                showSearch
+                size="large"
+                placeholder="Chọn danh mục sản phẩm"
+                optionFilterProp="children"
+                mode="multiple"
+                onChange={onChange}
+                onSearch={onSearch}
+                style={{ minWidth: "60px", marginRight: "props.pageSizepx" }}
+                filterOption={(input, option: any) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+                filterSort={(optionA: any, optionB: any) =>
+                  optionA.children
+                    .toLowerCase()
+                    .localeCompare(optionB.children.toLowerCase())
+                }
+              >
+                {categoryproduct.listcategoryproduct.map((item) => (
+                  <Option value={item.id} key={item.id}>
+                    {item.dmsp_name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={[8, 0]}>
+          <Col md={12} xs={24}>
+            <Form.Item
+              label="Mã "
+              name="productcode"
+              rules={[{ required: true, message: "Nhập mã sản phẩm!" }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col md={12} xs={24}>
+            <Form.Item
+              label="Tên "
+              name="productname"
+              rules={[{ required: true, message: "Nhập tên sản phẩm!" }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={[8, 0]}>
+          <Col md={12} xs={24}>
+            <Form.Item
+              label="Giá gốc "
+              name="price_origin"
+              rules={[{ required: true, message: "Nhập giá!" }]}
+            >
+              <InputNumber
+                maxLength={25}
+                style={{ width: "100%" }}
+                formatter={(value: any) =>
+                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }
+                size="large"
+                parser={(value: any) => value.replace(/\$\s?|(,*)/g, "")}
+              />
+            </Form.Item>
+          </Col>
+          <Col md={12} xs={24}>
+            <Form.Item
+              label="Giá bán "
+              name="price_sale"
+              rules={[{ required: true, message: "Nhập giá!" }]}
+            >
+              <InputNumber
+                maxLength={25}
+                style={{ width: "100%" }}
+                formatter={(value: any) =>
+                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }
+                size="large"
+                parser={(value: any) => value.replace(/\$\s?|(,*)/g, "")}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
 
         <Form.Item
-          label="Khuyến mại "
-          name="id_promotion"
-          rules={[{ required: true, message: "Chọn khuyến mại!" }]}
-        >
-          <Select
-            showSearch
-            size="large"
-            placeholder="Chọn khuyến mại"
-            optionFilterProp="children"
-            onChange={onChange}
-            onSearch={onSearch}
-            style={{ minWidth: "60px", marginRight: "props.pageSizepx" }}
-            filterOption={(input, option: any) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-            filterSort={(optionA: any, optionB: any) =>
-              optionA.children
-                .toLowerCase()
-                .localeCompare(optionB.children.toLowerCase())
-            }
-          >
-            {promotion.listpromotion.map((item) => (
-              <Option value={item.id} key={item.id}>
-                {item.Promotion_name}
-              </Option>
-            ))}
-          </Select>
-        </Form.Item>
-        <Form.Item
-          label="Mã "
-          name="productcode"
-          // rules={[{ required: true, message: "Nhập mã sản phẩm!" }]}
-        >
-          <Input />
-        </Form.Item>
-        {/* ) : null} */}
-
-        <Form.Item
-          label="Tên "
-          name="productname"
+          label="Mô tả"
+          name="describe"
           rules={[{ required: true, message: "Nhập tên sản phẩm!" }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          label="Giá gốc "
-          name="price_origin"
-          rules={[{ required: true, message: "Nhập giá!" }]}
+          label="Cấu hình"
+          name="configuration"
+          rules={[{ required: true, message: "Nhập tên sản phẩm!" }]}
         >
-          <InputNumber
-            maxLength={25}
-            style={{ width: "100%" }}
-            formatter={(value: any) =>
-              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }
-            size="large"
-            parser={(value: any) => value.replace(/\$\s?|(,*)/g, "")}
-          />
+          <Input />
         </Form.Item>
+        <h5 style={{ textAlign: "center" }}>Chi tiết sản phẩm</h5>
 
-        <Form.Item
-          label="Giá bán "
-          name="price_sale"
-          rules={[{ required: true, message: "Nhập giá!" }]}
-        >
-          <InputNumber
-            maxLength={25}
-            style={{ width: "100%" }}
-            formatter={(value: any) =>
-              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }
-            size="large"
-            parser={(value: any) => value.replace(/\$\s?|(,*)/g, "")}
-          />
-        </Form.Item>
-
+        <Form.List name="productdetails">
+          {(fields, { add, remove }) => {
+            return (
+              <div>
+                {fields.map((field, index) => (
+                  <div key={field.key}>
+                    <Row gutter={[8, 0]}>
+                      <Col md={12} xs={24}>
+                        <Form.Item
+                          name={[index, "title"]}
+                          label="Tiêu đề"
+                          rules={[{ required: true, message: "Nhập tiêu đề!" }]}
+                        >
+                          <Input placeholder="Tiêu đề" />
+                        </Form.Item>
+                      </Col>
+                      <Col md={11} xs={23}>
+                        <Form.Item
+                          name={[index, "specifications"]}
+                          label={`TSKD `}
+                          rules={[
+                            {
+                              required: true,
+                              message: "Nhập thông số kỹ thuật!",
+                            },
+                          ]}
+                        >
+                          <Input placeholder="Thông số kỹ thuật" />
+                        </Form.Item>
+                      </Col>
+                      <Col
+                        md={1}
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {fields.length > 1 ? (
+                          <MinusCircleOutlined
+                            style={{ fontSize: "20px" }}
+                            className="dynamic-delete-button"
+                            onClick={() => remove(field.name)}
+                          />
+                        ) : null}
+                      </Col>
+                    </Row>
+                    <hr />
+                  </div>
+                ))}
+                <Form.Item>
+                  <PlusCircleOutlined
+                    onClick={() => add()}
+                    style={{
+                      fontSize: "20px",
+                      float: "right",
+                      marginRight: "25px",
+                    }}
+                  />
+                </Form.Item>
+              </div>
+            );
+          }}
+        </Form.List>
+        {/* <CkeditorCpn /> */}
 
         {/* <Form.Item
           wrapperCol={{ offset: props.value?.id > 0 ? 3 : 3, span: 24 }}
@@ -346,6 +518,43 @@ function ModalProduct(props: propsModalProduct) {
             </div>
           )}
         </Form.Item> */}
+
+        <Row gutter={[0, 0]}>
+          {fileIMG?.map((value: any, idx: any) => {
+            return (
+              <Col span={6}>
+                <div className="info_image">
+                  <Image
+                    key={idx}
+                    width={150}
+                    height={150}
+                    src={
+                      // value.split(".").length > 1
+                      //   ? "http://103.173.155.138:5500/images/" + value
+                      //   : "https://cf.shopee.vn/file/" + value
+                      "http://103.173.155.138:5500/images/" + value
+                    }
+                  />
+                  <span
+                    className="icon_delete"
+                    onClick={() => deleteIMG(value)}
+                  >
+                    x
+                  </span>
+                </div>
+              </Col>
+            );
+          })}
+        </Row>
+
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          // style={{ display: "none" }}
+          onChange={onchangeIMG}
+          // ref={inputRef}
+        />
 
         <Form.Item
           wrapperCol={{ offset: props.value?.id > 0 ? 22 : 21, span: 24 }}
