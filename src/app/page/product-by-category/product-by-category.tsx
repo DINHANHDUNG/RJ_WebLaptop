@@ -1,8 +1,52 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Col, Pagination, Row } from "antd";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { getAllCategoryAdmin } from "../../../features/admin/categoryAdnim";
+import { getAllCategoryProductAdmin } from "../../../features/admin/categoryProductAdnim";
+import { getAllProductAdmin } from "../../../features/admin/productAdnim";
+import { useAppSelector } from "../../commom/hooks";
+import {
+  categoryAdminStore,
+  categoryProductAdminStore,
+  productAdminStore,
+} from "../../commom/use-selector";
 import ItemProduct from "../../component/customer/product/item-product/item-product";
 
 function ProductByCategory() {
+  const history = useNavigate();
+  const { ID } = useParams();
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  console.log(ID);
+  const category = useAppSelector(categoryAdminStore);
+
+  const products = useAppSelector(productAdminStore);
+  const categoryproduct = useAppSelector(categoryProductAdminStore);
+
+  console.log(products, categoryproduct);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllCategoryAdmin());
+    dispatch(
+      getAllCategoryProductAdmin({
+        page: 0,
+        noitem: 0,
+      })
+    );
+    if (ID) {
+      dispatch(
+        getAllProductAdmin({
+          id_category: Number(ID),
+          // id_category: 0,
+          page: page,
+          noitem: pageSize,
+        })
+      );
+    }
+  }, [ID]);
+
   return (
     <div className="container">
       <div className="row">
@@ -13,7 +57,10 @@ function ProductByCategory() {
                 className="toolbox-info"
                 style={{ fontSize: "18px", color: "#000", fontWeight: 600 }}
               >
-                Laptop Asus (Mới)
+                {
+                  category.listcategory.filter((e) => e.id === Number(ID))[0]
+                    ?.categoryname
+                }
               </div>
             </div>
 
@@ -26,73 +73,44 @@ function ProductByCategory() {
 
           <div className="products mb-3">
             <div className="row">
-              <div className="col-6 col-md-4 col-xl-3">
-                <ItemProduct />
-              </div>
-
-              <div className="col-6 col-md-4 col-xl-3">
-                <ItemProduct />
-              </div>
-
-              <div className="col-6 col-md-4 col-xl-3">
-                <ItemProduct />
-              </div>
-
-              <div className="col-6 col-md-4 col-xl-3">
-                <ItemProduct />
-              </div>
-
-              <div className="col-6 col-md-4 col-xl-3">
-                <ItemProduct />
-              </div>
-
-              <div className="col-6 col-md-4 col-xl-3">
-                <ItemProduct />
-              </div>
+              {products.listproduct.map((value) => (
+                <div className="col-6 col-md-4 col-xl-3">
+                  <ItemProduct value={value} />
+                </div>
+              ))}
             </div>
           </div>
 
-          <nav aria-label="Page navigation">
-            <ul className="pagination">
-              <li className="page-item disabled">
-                <a
-                  className="page-link page-link-prev"
-                  href="#"
-                  aria-label="Previous"
-                  // tabindex="-1"
-                  aria-disabled="true"
-                >
-                  <span aria-hidden="true">
-                    <i className="icon-long-arrow-left"></i>
-                  </span>
-                  Prev
-                </a>
-              </li>
-              <li className="page-item active" aria-current="page">
-                <a className="page-link" href="#">
-                  1
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  2
-                </a>
-              </li>
-              <li className="page-item-total">of 2</li>
-              <li className="page-item">
-                <a
-                  className="page-link page-link-next"
-                  href="#"
-                  aria-label="Next"
-                >
-                  Next{" "}
-                  <span aria-hidden="true">
-                    <i className="icon-long-arrow-right"></i>
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <Row gutter={[24, 24]}>
+            <Col xl={24}>
+              {products.total > 0 ? (
+                <Pagination
+                  style={{
+                    marginTop: "10px",
+                    float: "right",
+                    marginBottom: "10px",
+                  }}
+                  onChange={(page, pageSizeNew) => {
+                    console.log(page, pageSizeNew);
+                    setPage(page);
+                    dispatch(
+                      getAllProductAdmin({
+                        id_category: Number(ID),
+                        page: page,
+                        noitem: pageSizeNew ? pageSizeNew : pageSize,
+                      })
+                    );
+                    if (pageSizeNew) {
+                      setPageSize(pageSizeNew);
+                    }
+                  }}
+                  pageSize={pageSize}
+                  current={page}
+                  total={products.total}
+                />
+              ) : null}
+            </Col>
+          </Row>
         </div>
 
         <aside className="col-lg-3 col-xl-5col order-lg-first">
@@ -107,28 +125,24 @@ function ProductByCategory() {
                     Danh mục
                   </div>
                 </div>
-
-                
               </div>
               <nav className="side-nav">
-                <div style={{width: "100%", borderBottom: "1px groove", opacity: '0.3'}}></div>
+                <div
+                  style={{
+                    width: "100%",
+                    borderBottom: "1px groove",
+                    opacity: "0.3",
+                  }}
+                ></div>
                 <ul className="menu-vertical sf-arrows">
-                  <li>
-                    <Link to={"category/asus"} >Laptop dành cho sinh viên</Link>
-                  </li>
-                  <li>
-                    <Link to={"category/asus"} >Laptop dành cho lập trình viên</Link>
-                  </li>
-                  <li>
-                    <Link to={"category/asus"} >Laptop chuyên đồ họa</Link>
-                  </li>
-                  <li>
-                    <Link to={"category/asus"} >Laptop doanh nhân</Link>
-                  </li>
-                  <li>
-                    <Link to={"category/asus"} >Laptop Gaming</Link>
-                  </li>
-                  
+                  {categoryproduct.listcategoryproduct?.map((e) => (
+                    <li>
+                      {/* <Link to={''} onClick={()=>{
+                        history("/detail/" + item.product.id);
+                      }}>{e.dmsp_name}</Link> */}
+                      <Link to={`/laptop/${e.id}`}>{e.dmsp_name}</Link>
+                    </li>
+                  ))}
                 </ul>
               </nav>
             </div>

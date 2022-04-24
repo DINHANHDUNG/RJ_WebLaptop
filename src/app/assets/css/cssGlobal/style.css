@@ -18,3 +18,9 @@
 ::-webkit-scrollbar {
   width: 1px;
 }
+
+.ant-image-preview-img-wrapper{
+  justify-content: center;
+    display: flex;
+    align-items: center;
+}

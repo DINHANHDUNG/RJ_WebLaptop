@@ -1,17 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Product } from "../../../../types/product";
 
-function ItemProduct() {
+interface propsProduct {
+  value: Product;
+}
+function ItemProduct(props: propsProduct) {
   return (
     <div className="product">
       <figure className="product-media">
         {/* <span className="product-label label-top">Top</span> */}
-        <Link to="/detailproduct/1">
+        <Link to={"/detailproduct/" + props.value.id}>
           <img
             src="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04820-dell-inspiron-5410-laptoptcc-1-1.jpg"
             alt="Product image"
             className="product-image"
           />
+          {/* 
+<img
+            src={"http://103.173.155.138:5500/images/" + props.value.}
+            alt="Product image"
+            className="product-image"
+          /> */}
         </Link>
         {/* <Link to="/detailproduct/1"></Link> */}
       </figure>
@@ -21,15 +31,12 @@ function ItemProduct() {
               <a href="#">Laptops</Link>
             </div> */}
         <h3 className="product-title">
-          <Link to="/detailproduct/1">MacBook Pro 13" Display, i5</Link>
+          <Link to="/detailproduct/1">{props.value.productname}</Link>
         </h3>
-        <p>
-          Chinh phục mọi ánh nhìn với vẻ ngoài ấn tượng Laptop Dell này được chế
-          tác từ chất liệu nhựa…
-        </p>
+        <p>{props.value.describe}</p>
         <div className="product-price">
-          $1,199.00
-          <span className="old-price">Giá cũ $410.00</span>
+          {props.value.price_sale} VNĐ
+          {/* <span className="old-price">Giá cũ {props.value.price_origin} VNĐ</span> */}
         </div>
       </div>
     </div>

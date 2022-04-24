@@ -19,7 +19,7 @@ function LayoutCustomer() {
           <Route index element={<Home />} />
           <Route path="detailproduct/:ID" element={<DetailProduct />}></Route>
           <Route
-            path="category/asus"
+            path="laptop/:ID"
             element={<ProductByCategory />}
           ></Route>
           <Route path="*" element={<Error404 />}></Route>

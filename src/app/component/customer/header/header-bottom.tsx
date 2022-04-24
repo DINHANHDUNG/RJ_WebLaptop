@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { getAllCategoryAdmin } from "../../../../features/admin/categoryAdnim";
+import { useAppSelector } from "../../../commom/hooks";
+import { categoryAdminStore } from "../../../commom/use-selector";
 
 function HeaderBottom() {
+  const category = useAppSelector(categoryAdminStore);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllCategoryAdmin());
+  }, []);
+
+  // console.log(
+  //   category.listcategory.filter((item: any, index: any) => {
+  //     return item;
+  //   })
+  // );
+
   return (
     <div className="header-bottom sticky-header">
       <div className="container">
@@ -13,7 +29,7 @@ function HeaderBottom() {
                 <a href="/">Trang chủ</a>
               </li>
 
-              <li>
+              {/* <li>
                 <a href="#" className="sf-with-ul">
                   Dịch vụ
                 </a>
@@ -41,18 +57,20 @@ function HeaderBottom() {
                     <Link to={"category/asus"}>Dịch vụ khác</Link>
                   </li>
                 </ul>
-              </li>
+              </li> */}
               <li>
                 <a href="#" className="sf-with-ul">
                   Laptop
                 </a>
 
                 <ul>
-                  <li>
-                    <Link to={"category/asus"}>Asus</Link>
-                  </li>
+                  {category.listcategory.map((val) => (
+                    <li>
+                      <Link to={`laptop/${val.id}`}>{val.categoryname}</Link>
+                    </li>
+                  ))}
 
-                  <li>
+                  {/* <li>
                     <a href="#">Grid</a>
                     <ul>
                       <li>
@@ -112,10 +130,10 @@ function HeaderBottom() {
                         </a>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
                 </ul>
               </li>
-              <li>
+              {/* <li>
                 <a href="elements-list.html" className="sf-with-ul">
                   Elements
                 </a>
@@ -166,7 +184,7 @@ function HeaderBottom() {
                     <a href="elements-icon-boxes.html">Icon Boxes</a>
                   </li>
                 </ul>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </div>
