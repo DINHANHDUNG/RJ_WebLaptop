@@ -51,7 +51,7 @@ function ModalProduct(props: propsModalProduct) {
   const [form] = Form.useForm();
   useEffect(() => {
     form.resetFields();
-    setFileIMG(props.value.productimages);
+    setFileIMG(props.value.productimages ? props.value.productimages : []);
   }, [props.value.id]);
 
   useEffect(() => {
