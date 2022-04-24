@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { getAllCategoryAdmin } from "../../../../../features/admin/categoryAdnim";
+import { useAppSelector } from "../../../../commom/hooks";
+import { categoryAdminStore } from "../../../../commom/use-selector";
 
 function Mobilemenu() {
+  const category = useAppSelector(categoryAdminStore);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllCategoryAdmin());
+  }, []);
   return (
     <div>
       <div className="mobile-menu-overlay"></div>
@@ -8,7 +18,7 @@ function Mobilemenu() {
       <div className="mobile-menu-container mobile-menu-light">
         <div className="mobile-menu-wrapper">
           <span className="mobile-menu-close">
-          <i className="fa-solid fa-align-justify"></i>
+            <i className="fa-solid fa-align-justify"></i>
           </span>
 
           <form action="#" method="get" className="mobile-search">
@@ -67,21 +77,23 @@ function Mobilemenu() {
               <nav className="mobile-nav">
                 <ul className="mobile-menu">
                   <li className="active">
-                    <a href="index.html">Home</a>
+                    <a href="/">Trang chủ</a>
+                  </li>
+                  
 
+                  <li>
+                    <a href="category.html">Laptop</a>
                     <ul>
-                      <li>
-                        <a href="index-1.html">01 - furniture store</a>
-                      </li>
-                      <li>
-                        <a href="index-2.html">02 - furniture store</a>
-                      </li>
-                      <li>
-                        <a href="index-3.html">03 - electronic store</a>
-                      </li>
+                      {category.listcategory.map((val) => (
+                        <li>
+                          <Link to={`laptop/${val.id}`}>
+                            {val.categoryname}
+                          </Link>
+                        </li>
+                      ))}
                     </ul>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="category.html">Shop</a>
                     <ul>
                       <li>
@@ -394,7 +406,7 @@ function Mobilemenu() {
                   </li>
                   <li>
                     <a href="#">Outdoor Furniture </a>
-                  </li>
+                  </li> */}
                 </ul>
               </nav>
             </div>
