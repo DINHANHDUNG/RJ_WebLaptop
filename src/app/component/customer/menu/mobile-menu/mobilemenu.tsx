@@ -82,11 +82,11 @@ function Mobilemenu() {
                   
 
                   <li>
-                    <a href="category.html">Laptop</a>
+                    <a href="#">Laptop</a>
                     <ul>
                       {category.listcategory.map((val) => (
-                        <li>
-                          <Link to={`laptop/${val.id}`}>
+                        <li className="mobile-menu-close">
+                          <Link to={`laptop/${val.id}`} >
                             {val.categoryname}
                           </Link>
                         </li>

@@ -44,21 +44,22 @@ function Category() {
       // )
     },
 
-    // {
-    //     title: "Danh mục cha",
-    //     key: "customer",
-    //     dataIndex: "customer",
-    //     render: (customer: any) => <>{customer.username}</>,
-    //     sorter: (a: any, b: any) =>
-    //       a.customer.username.localeCompare(b.customer.username),
-    //     // sortDirections: ['descend']
-    //   },
+    
 
     {
       title: "Tên danh mục",
       dataIndex: "categoryname",
       key: "categoryname",
-      sorter: (a: any, b: any) => a.categoryname.localeCompare(b.categoryname),
+    },
+
+    {
+      title: "Danh mục cha",
+      key: "id_parent",
+      dataIndex: "id_parent",
+      render: (id_parent: any) => <>{id_parent}</>,
+      sorter: (a: any, b: any) =>
+        a.id_parent.localeCompare(b.id_parent),
+      // sortDirections: ['descend']
     },
 
     {

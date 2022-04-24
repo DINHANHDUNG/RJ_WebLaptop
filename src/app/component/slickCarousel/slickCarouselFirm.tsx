@@ -2,7 +2,7 @@ import { Image } from "antd";
 import React from "react";
 import Slider from "react-slick";
 
-function SlickCarousel() {
+function SlickCarousel(props: { value: any }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -16,57 +16,31 @@ function SlickCarousel() {
     // nextArrow: <SampleNextArrow />,
     // prevArrow: <SamplePrevArrow />,
   };
+
+  console.log(props.value.filter((val: any) => val.type != "1"));
+
   return (
     <div>
       <Slider {...settings}>
-        <div>
-          <Image
-            width={"100%"}
-            // height={100}
-            src={`https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg`}
-            style={{ padding: "10px" }}
-          />
-        </div>
-        <div>
-          <Image
-            width={"100%"}
-            // height={100}
-            src={`https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04842-dell-inspiron-5410-laptoptcc-600x338.jpg`}
-            style={{ padding: "10px" }}
-          />
-        </div>
-        <div>
-          <Image
-            width={"100%"}
-            // height={100}
-            src={`https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04844-dell-inspiron-5410-laptoptcc-600x338.jpg`}
-            style={{ padding: "10px" }}
-          />
-        </div>
-        <div>
-          <Image
-            width={"100%"}
-            // height={100}
-            src={`https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-600x338.jpg`}
-            style={{ padding: "10px" }}
-          />
-        </div>
+        {props.value
+          .filter((val: any) => val.type != "1")
+          ?.map((v: any) => (
+            <div>
+              <Image
+                width={"100%"}
+                // height={100}
+                src={"http://103.173.155.138:5500/images/" + v.imagename}
+                style={{ padding: "10px" }}
+              />
+            </div>
+          ))}
 
-        <div>
-          <Image
-            width={"100%"}
-            // height={100}
-            src={`https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04832-dell-inspiron-5410-laptoptcc-600x338.jpg`}
-            style={{ padding: "10px" }}
-          />
-        </div>
       </Slider>
     </div>
   );
 }
 
 export default SlickCarousel;
-
 
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -84,7 +58,7 @@ function SamplePrevArrow(props: any) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", }}
+      style={{ ...style, display: "block" }}
       onClick={onClick}
     />
   );

@@ -47,12 +47,31 @@ function ModalProduct(props: propsModalProduct) {
   const categorys = useAppSelector(categoryAdminStore);
   const promotion = useAppSelector(promotionAdminStore);
   const categoryproduct = useAppSelector(categoryProductAdminStore);
+  const [id_dmsps, setId_dmsps] = useState([]);
+  console.log(id_dmsps);
+
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   useEffect(() => {
-    form.resetFields();
+    let arrid_dmsps = [] as any;
+    if (props.value.id) {
+      props.value.product_dmsps.map((val: any) => {
+        console.log(val);
+        arrid_dmsps.push(val.id_dmsp);
+      });
+    }
     setFileIMG(props.value.productimages ? props.value.productimages : []);
+    
+    // form.setFieldsValue({
+    //   id_dmsps: arrid_dmsps,
+    // })
+    setId_dmsps(arrid_dmsps);
+    form.resetFields();
   }, [props.value.id]);
+
+  useEffect(()=>{
+    form.resetFields();
+  },[id_dmsps])
 
   useEffect(() => {
     dispatch(
@@ -79,13 +98,13 @@ function ModalProduct(props: propsModalProduct) {
       console.log(idx);
       if (idx === 0) {
         arrIMG.push({
-          imagename: val,
-          type: 1,
+          imagename: val.imagename,
+          type: '1',
         });
       } else {
         arrIMG.push({
-          imagename: val,
-          type: 2,
+          imagename: val.imagename,
+          type: '2',
         });
       }
     });
@@ -200,7 +219,10 @@ function ModalProduct(props: propsModalProduct) {
         // setFileIMG(res.data.data.imageName);
         console.log(res.data.data.imageName);
         console.log(res.data.data.imageUrl);
-        setFileIMG((pre: any) => [...pre, res.data.data.imageName]);
+        setFileIMG((pre: any) => [
+          ...pre,
+          { imagename: res.data.data.imageName },
+        ]);
         setUploading(false);
       })
       .catch((err) => {
@@ -229,7 +251,7 @@ function ModalProduct(props: propsModalProduct) {
         initialValues={{
           id_category: props.value.id_category,
           id_promotion: props.value.id_promotion,
-          id_dmsps: props.value.id_dmsps,
+          id_dmsps:id_dmsps,
           productcode: props.value.productcode,
           productname: props.value.productname,
           configuration: props.value.configuration,
@@ -521,6 +543,8 @@ function ModalProduct(props: propsModalProduct) {
 
         <Row gutter={[0, 0]}>
           {fileIMG?.map((value: any, idx: any) => {
+            console.log(value);
+
             return (
               <Col span={6}>
                 <div className="info_image">
@@ -532,7 +556,7 @@ function ModalProduct(props: propsModalProduct) {
                       // value.split(".").length > 1
                       //   ? "http://103.173.155.138:5500/images/" + value
                       //   : "https://cf.shopee.vn/file/" + value
-                      "http://103.173.155.138:5500/images/" + value
+                      "http://103.173.155.138:5500/images/" + value.imagename
                     }
                   />
                   <span

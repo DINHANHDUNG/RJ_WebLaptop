@@ -6,6 +6,7 @@ export interface Product {
   id_category: number;
   id_promotion: number;
   id_dmsps: number;
+  product_dmsps: any;
   productcode: string;
   productname: string;
   price_origin: number;
@@ -17,7 +18,7 @@ export interface Product {
   category: Category;
   promotion: Promotion;
   promotiondetails: promotiondetails;
-  productimages: [string];
+  productimages: Array<any>;
   productdetails: any;
 }
 

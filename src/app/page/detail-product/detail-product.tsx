@@ -32,71 +32,13 @@ function DetailProduct() {
                     <Image
                       width={"100%"}
                       // height={100}
-                      src={`https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg`}
+                      src={"http://103.173.155.138:5500/images/" + products.listproduct[0]?.productimages[0]?.imagename}
                     />
-                    {/* <img
-                      id="product-zoom"
-                      src="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                      data-zoom-image="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                      alt="product image"
-                    /> */}
-
                     
                   </figure>
                   {/* <SlickDetailProduct /> */}
-                  <SlickCarousel />
-                  {/* <div
-                    id="product-zoom-gallery"
-                    className="product-image-gallery"
-                  >
-                    <a
-                      className="product-gallery-item active"
-                      href="#"
-                      data-image="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                      data-zoom-image="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                    >
-                      <img
-                        src="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                        alt="product side"
-                      />
-                    </a>
-
-                    <a
-                      className="product-gallery-item"
-                      href="#"
-                      data-image="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04832-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                      data-zoom-image="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04832-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                    >
-                      <img
-                        src="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                        alt="product cross"
-                      />
-                    </a>
-
-                    <a
-                      className="product-gallery-item"
-                      href="#"
-                      data-image="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                      data-zoom-image="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                    >
-                      <img
-                        src="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                        alt="product with model"
-                      />
-                    </a>
-
-                    <a
-                      className="product-gallery-item"
-                      href="#"
-                      data-image="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                      data-zoom-image="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                    >
-                      <img
-                        src="https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg"
-                        alt="product back"
-                      />
-                    </a>
-                  </div> */}
+                  <SlickCarousel value={products.listproduct[0].productimages}/>
+                  
                 </div>
               </div>
 
@@ -116,48 +58,23 @@ function DetailProduct() {
                     <span>{products.listproduct[0].price_sale} VNĐ</span>
                   </div>
                   <div className="product-content">
-                    <p>
-                      <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
-                      <span style={{ color: "black", fontWeight: 600 }}>
-                        CPU{" "}
-                      </span>
-                      Intel® Core™ i3-1115G4
-                    </p>
-                    <p>
-                      <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
-                      <span style={{ color: "black", fontWeight: 600 }}>
-                        Ram{" "}
-                      </span>
-                      4GB, DDR4
-                    </p>
-                    <p>
-                      <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
-                      <span style={{ color: "black", fontWeight: 600 }}>
-                        Ổ{" "}
-                      </span>
-                      cứng 256GB M.2 PCIe NVMe
-                    </p>
-                    <p>
-                      <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
-                      <span style={{ color: "black", fontWeight: 600 }}>
-                        Màn{" "}
-                      </span>
-                      hình 15.6-inch FHD (1920 x 1080) Anti-glare LED Backlight
-                      Non-Touch Narrow Border WVA Display
-                    </p>
-                    <p>
-                      <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
-                      <span style={{ color: "black", fontWeight: 600 }}>
-                        VGA{" "}
-                      </span>
-                      Intel® Iris® Xe Graphics with shared graphics memory
-                    </p>
+                    {products.listproduct[0].productdetails?.map((val: any) => (
+                      <p>
+                        <span style={{ color: "green", fontWeight: 600 }}>
+                          ✔
+                        </span>{" "}
+                        <span style={{ color: "black", fontWeight: 600 }}>
+                          {val.title}{" "}
+                        </span>
+                        {val.specifications}
+                      </p>
+                    ))}
                   </div>
                 </div>
 
-                <ConfigProduct />
+                <ConfigProduct value={products.listproduct[0]}/>
 
-                <BoxPromotion />
+                <BoxPromotion value={products.listproduct[0]}/>
               </div>
             </div>
           </>
@@ -227,32 +144,16 @@ function DetailProduct() {
             aria-labelledby="product-info-link"
           >
             <div className="product-desc-content">
-              <p>
-                <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
-                <span style={{ color: "black", fontWeight: 600 }}>CPU </span>
-                Intel® Core™ i3-1115G4
-              </p>
-              <p>
-                <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
-                <span style={{ color: "black", fontWeight: 600 }}>Ram </span>
-                4GB, DDR4
-              </p>
-              <p>
-                <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
-                <span style={{ color: "black", fontWeight: 600 }}>Ổ </span>
-                cứng 256GB M.2 PCIe NVMe
-              </p>
-              <p>
-                <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
-                <span style={{ color: "black", fontWeight: 600 }}>Màn </span>
-                hình 15.6-inch FHD (1920 x 1080) Anti-glare LED Backlight
-                Non-Touch Narrow Border WVA Display
-              </p>
-              <p>
-                <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
-                <span style={{ color: "black", fontWeight: 600 }}>VGA </span>
-                Intel® Iris® Xe Graphics with shared graphics memory
-              </p>
+              {products.listproduct[0]?.productdetails?.map((val: any) => (
+                <p>
+                  <span style={{ color: "green", fontWeight: 600 }}>✔</span>{" "}
+                  <span style={{ color: "black", fontWeight: 600 }}>
+                    {val.title}{" "}
+                  </span>
+                  {val.specifications}
+                </p>
+              ))}
+              
             </div>
           </div>
 
