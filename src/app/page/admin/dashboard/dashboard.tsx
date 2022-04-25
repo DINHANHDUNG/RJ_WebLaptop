@@ -49,18 +49,20 @@ function Dashboard() {
     dispatch(getAllCategoryAdmin()).then((res: any) => {
       console.log(res);
 
-      if (res.payload.result[0].id) {
-        setValueInputSelect(res.payload.result[0].id);
-        dispatch(
-          getAllProductAdmin({
-            id_category: res.payload.result[0].id,
-            // id_category: 0,
-            page: page,
-            noitem: pageSize,
-          })
-        );
-      }
+      // if (res.payload.result[0].id) {
+        
+      // }
     });
+    setValueInputSelect(0);
+
+    dispatch(
+      getAllProductAdmin({
+        id_category: 0,
+        // id_category: 0,
+        page: page,
+        noitem: pageSize,
+      })
+    );
   }, []);
 
   const columns = [
@@ -92,7 +94,7 @@ function Dashboard() {
       key: "productname",
       sorter: (a: any, b: any) => a.productname.localeCompare(b.productname),
     },
-    
+
     {
       title: "Giá gốc",
       dataIndex: "price_origin",
@@ -183,7 +185,7 @@ function Dashboard() {
                   optionFilterProp="children"
                   onChange={onChange}
                   onSearch={onSearch}
-                  style={{ minWidth: "60px", marginRight: "10px" }}
+                  style={{ minWidth: "120px", marginRight: "10px" }}
                   value={valueInputSelect}
                   filterOption={(input, option: any) =>
                     option?.children
@@ -191,6 +193,9 @@ function Dashboard() {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
+                  <Option value={0} key={0}>
+                    Tất cả danh mục
+                  </Option>
                   {categorys?.listcategory?.map((item) => (
                     <Option value={item.id} key={item.id}>
                       {item.categoryname}

@@ -266,7 +266,7 @@ function ModalProduct(props: propsModalProduct) {
         <Row gutter={[8, 0]}>
           <Col md={8} xs={24}>
             <Form.Item
-              label="DM"
+              label="Danh mục"
               name="id_category"
               rules={[{ required: true, message: "Chọn danh mục!" }]}
             >
@@ -299,7 +299,7 @@ function ModalProduct(props: propsModalProduct) {
 
           <Col md={8} xs={24}>
             <Form.Item
-              label="KM"
+              label="Khuyến mại"
               name="id_promotion"
               rules={[{ required: true, message: "Chọn khuyến mại!" }]}
             >
@@ -332,7 +332,7 @@ function ModalProduct(props: propsModalProduct) {
 
           <Col md={8} xs={24}>
             <Form.Item
-              label="DMSP"
+              label="Danh mục sản phẩm"
               name="id_dmsps"
               rules={[{ required: true, message: "Chọn danh mục sản phẩm!" }]}
             >

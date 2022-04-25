@@ -79,7 +79,8 @@ function ModalCategory(props: propsModalCategory) {
         // wrapperCol={{ span: 16 }}
         initialValues={{
           categoryname: props.value.categoryname,
-          idcategory: props.value.id_parent,
+          idcategory:
+            props.value.id_parent === 0 ? null : props.value.id_parent,
           dmcha: props.value.name_parent,
         }}
         onFinish={onFinish}

@@ -1276,8 +1276,8 @@ blockquote.text-white cite span {
 }
 .header-intro-clearance .header-middle .header-center,
 .header-intro-clearance .header-bottom .header-center {
-  flex: 0 0 calc((100% + 20px) / 2 - 20px);
-  max-width: calc((100% + 20px) / 2 - 20px);
+  /* flex: 0 0 calc((100% + 20px) / 2 - 20px);
+  max-width: calc((100% + 20px) / 2 - 20px); */
   margin: 0;
 }
 .header-intro-clearance .header-middle .header-right,

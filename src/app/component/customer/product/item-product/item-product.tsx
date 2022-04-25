@@ -37,7 +37,7 @@ function ItemProduct(props: propsProduct) {
               <a href="#">Laptops</Link>
             </div> */}
         <h3 className="product-title">
-          <Link to="/detailproduct/1">{props.value.productname}</Link>
+          <Link to={"/detailproduct/" + props.value.id}>{props.value.productname}</Link>
         </h3>
         <p>{props.value.describe}</p>
         <div className="product-price">
