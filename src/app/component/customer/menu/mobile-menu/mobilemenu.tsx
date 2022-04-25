@@ -1,17 +1,16 @@
-import { Menu } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllCategoryTrees } from "../../../../../features/admin/categoryAdnim";
+import { getAllCategoryAdmin } from "../../../../../features/admin/categoryAdnim";
 import { useAppSelector } from "../../../../commom/hooks";
 import { categoryAdminStore } from "../../../../commom/use-selector";
 
 function Mobilemenu() {
   const category = useAppSelector(categoryAdminStore);
+
   const dispatch = useDispatch();
-  const { SubMenu } = Menu;
   useEffect(() => {
-    // dispatch(getAllCategoryTrees());
+    // dispatch(getAllCategoryAdmin());
   }, []);
   return (
     <div>
@@ -54,19 +53,6 @@ function Mobilemenu() {
                 Menu
               </a>
             </li>
-            {/* <li className="nav-item">
-              <a
-                className="nav-link"
-                id="mobile-cats-link"
-                data-toggle="tab"
-                href="#mobile-cats-tab"
-                role="tab"
-                aria-controls="mobile-cats-tab"
-                aria-selected="false"
-              >
-                Categories
-              </a>
-            </li> */}
           </ul>
 
           <div className="tab-content">
@@ -81,79 +67,116 @@ function Mobilemenu() {
                   <li className="active">
                     <a href="/">Trang chủ</a>
                   </li>
-
-                  {/* <Menu
-                    style={{ width: 256 }}
-                    // defaultOpenKeys={["sub1"]}
-                    mode="inline"
-                  >
-                    {category.listcategory?.map((val) =>
-                      val.children.length > 0 ? (
-                        <SubMenu key="v.id" title={val.categoryname}>
-                          <Menu.ItemGroup>
-                            {val.children?.map((v) => (
-                              <Menu.Item key={v.id} className="ChildItems">
-                                <Link to={`danhmuc/${v.id}`}>
-                                  {v.categoryname}
-                                </Link>
-                              </Menu.Item>
-                            ))}
-                          </Menu.ItemGroup>
-                        </SubMenu>
-                      ) : (
-                        <Menu.Item key={val.id}>
-                          <Link
-                            to={`danhmuc/${val.id}`}
-                            style={{ float: "left" }}
-                          >
+                  {/* 
+                  {category.listcategory.map((val) => (
+                    <li className="mobile-menu-close">
+                      <Link to={`laptop/${val.id}`}>{val.categoryname}</Link>
+                      <ul>
+                        <li>
+                          <Link to={`laptop/${val.id}`}>
                             {val.categoryname}
                           </Link>
-                        </Menu.Item>
-                      )
-                    )}
-                  </Menu> */}
-
-                  {category.listcategory?.map((val) => (
-                    <li>
-                      <Link
-                        className={val.children?.length > 0 ? "sf-with-ul" : ""}
-                        to={`danhmuc/${val.id}`}
-                      >
-                        {val.categoryname}
-                      </Link>
-
-                      {val.children?.map((v) => (
-                        <ul>
-                          <li>
-                            <Link to={`danhmuc/${v.id}`}>{v.categoryname}</Link>
-
-                            {v.children?.map((e) => (
-                              <ul>
-                                <li>
-                                  <Link to={`danhmuc/${e.id}`}>
-                                    {e.categoryname}
-                                  </Link>
-                                </li>
-                              </ul>
-                            ))}
-                          </li>
-                        </ul>
-                      ))}
+                        </li>
+                      </ul>
                     </li>
-                  ))}
+                  ))} */}
 
                   {/* <li>
                     <a href="#">Laptop</a>
                     <ul>
                       {category.listcategory.map((val) => (
-                        <li >
-                          <Link to={`danhmuc/${val.id}`}>
+                        <li className="mobile-menu-close">
+                          <Link to={`laptop/${val.id}`}>
                             {val.categoryname}
                           </Link>
                         </li>
                       ))}
                     </ul>
                   </li> */}
+
+                  {category.listcategory?.map((val) => (
+                    <li key={val.id}>
+                      <Link to={`laptop/${val.id}`}>{val.categoryname}</Link>
+                      <ul>
+                        {val.children?.map((v) => (
+                          <li>
+                            <Link to={`danhmuc/${v.id}`}>{v.categoryname}</Link>
+                            {v.children?.length > 0 ? (
+                              <ul>
+                                {v.children?.map((e) => (
+                                  <li>
+                                    <Link to={`danhmuc/${e.id}`}>
+                                      {e.categoryname}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : null}
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+
+                  <li>
+                    <Link to="category.html">Shop</Link>
+                    <ul>
+                      <li>
+                        <a href="category-list.html">Shop List</a>
+                      </li>
+                      <li>
+                        <a href="category-2cols.html">Shop Grid 2 Columns</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div
+              className="tab-pane fade"
+              id="mobile-cats-tab"
+              role="tabpanel"
+              aria-labelledby="mobile-cats-link"
+            >
+              <nav className="mobile-cats-nav">
+                <ul className="mobile-cats-menu">
+                  <li>
+                    <a className="mobile-cats-lead" href="#">
+                      Daily offers
+                    </a>
+                  </li>
+                  <li>
+                    <a className="mobile-cats-lead" href="#">
+                      Gift Ideas
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">Beds</a>
+                  </li>
+                  <li>
+                    <a href="#">Lighting</a>
+                  </li>
+                  <li>
+                    <a href="#">Sofas & Sleeper sofas</a>
+                  </li>
+                  <li>
+                    <a href="#">Storage</a>
+                  </li>
+                  <li>
+                    <a href="#">Armchairs & Chaises</a>
+                  </li>
+                  <li>
+                    <a href="#">Decoration </a>
+                  </li>
+                  <li>
+                    <a href="#">Kitchen Cabinets</a>
+                  </li>
+                  <li>
+                    <a href="#">Coffee & Tables</a>
+                  </li>
+                  <li>
+                    <a href="#">Outdoor Furniture </a>
+                  </li>
                 </ul>
               </nav>
             </div>

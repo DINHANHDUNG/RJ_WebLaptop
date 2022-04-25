@@ -96,16 +96,16 @@ function Footer() {
 
                 <ul className="widget-list">
                   <li>
-                    <a href="about.html">Sò Lap</a>
+                    <a href="#">Sò Lap</a>
                   </li>
                   <li>
                     <a href="#">Làm thế nào để mua sắm </a>
                   </li>
                   <li>
-                    <a href="faq.html">FAQ</a>
+                    <a href="#">FAQ</a>
                   </li>
                   <li>
-                    <a href="contact.html">Liên hệ với chúng tôi</a>
+                    <a href="#">Liên hệ với chúng tôi</a>
                   </li>
                 </ul>
               </div>
@@ -140,9 +140,9 @@ function Footer() {
                   <li>
                     <a href="#">Đăng nhập</a>
                   </li>
-                  <li>
-                    <a href="cart.html">Giỏ hàng</a>
-                  </li>
+                  {/* <li>
+                    <a href="#">Giỏ hàng</a>
+                  </li> */}
                   <li>
                     <a href="#">Hỗ trợ</a>
                   </li>

@@ -31,31 +31,34 @@ function HeaderBottom() {
               </li>
 
               {category.listcategory?.map((val) => (
-                <li>
+                <li key={val.id}>
+                  {console.log("val", val)}
                   <Link
                     className={val.children?.length > 0 ? "sf-with-ul" : ""}
-                    to={`danhmuc/${val.id}`}
+                    // to={`danhmuc/${val.id}`}
+                    to={`#`}
                   >
                     {val.categoryname}
                   </Link>
 
-                  {val.children?.map((v) => (
-                    <ul>
+                  <ul>
+                    {val.children?.map((v) => (
                       <li>
                         <Link to={`danhmuc/${v.id}`}>{v.categoryname}</Link>
-
-                        {v.children?.map((e) => (
+                        {v.children?.length > 0 ? (
                           <ul>
-                            <li>
-                              <Link to={`danhmuc/${e.id}`}>
-                                {e.categoryname}
-                              </Link>
-                            </li>
+                            {v.children?.map((e) => (
+                              <li>
+                                <Link to={`danhmuc/${e.id}`}>
+                                  {e.categoryname}
+                                </Link>
+                              </li>
+                            ))}
                           </ul>
-                        ))}
+                        ) : null}
                       </li>
-                    </ul>
-                  ))}
+                    ))}
+                  </ul>
                 </li>
               ))}
 

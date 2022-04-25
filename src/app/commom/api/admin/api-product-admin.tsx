@@ -18,6 +18,11 @@ const productAPIAdmin = {
     return axiosClientAdmin.post(url, data);
   },
 
+  getProductbyHomePage(): Promise<any> {
+    const url = "product/getproducthomepage";
+    return axiosClientAdmin.get(url);
+  },
+
   getProductByIdADmin(data: { id: number }): Promise<any> {
     const url = "product/getproductbyid";
     return axiosClientAdmin.post(url, data);

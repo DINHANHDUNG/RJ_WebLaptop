@@ -1,11 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ProductHomePage } from "../../types/product-home-page";
 import ItemProduct from "../customer/product/item-product/item-product";
 
-function SlickCarouselProduct() {
+interface propsSlide {
+  value: ProductHomePage;
+}
+function SlickCarouselProduct(props: propsSlide) {
+  console.log("props", props);
+
   return (
     <div>
-      <h2 className="title title-border">Sản phẩm bán chạy</h2>
+      <h2 className="title title-border">{props.value.categoryname}</h2>
 
       <div
         className="owl-carousel owl-simple owl-nav-top carousel-equal-height carousel-with-shadow"
@@ -32,15 +38,9 @@ function SlickCarouselProduct() {
         }
     }'
       >
-        {/* <ItemProduct />
-
-        <ItemProduct />
-
-        <ItemProduct />
-
-        <ItemProduct />
-
-        <ItemProduct /> */}
+        {props.value.products.map((e) => (
+          <ItemProduct value={e} />
+        ))}
       </div>
     </div>
   );

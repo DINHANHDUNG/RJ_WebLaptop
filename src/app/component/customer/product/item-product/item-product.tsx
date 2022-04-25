@@ -23,7 +23,7 @@ function ItemProduct(props: propsProduct) {
           <img
             src={
               "http://103.173.155.138:5500/images/" +
-              props.value.productimages[0]?.imagename
+              props.value?.productimages[0]?.imagename
             }
             alt="Product image"
             className="product-image"
