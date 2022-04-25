@@ -39,7 +39,7 @@ function ItemProduct(props: propsProduct) {
         <h3 className="product-title">
           <Link to={"/detailproduct/" + props.value.id}>{props.value.productname}</Link>
         </h3>
-        <p>{props.value.describe}</p>
+        <p className="product-describe">{props.value.describe}</p>
         <div className="product-price">
           {Numberformat(props.value.price_sale)} VNĐ
           {/* <span className="old-price">Giá cũ {props.value.price_origin} VNĐ</span> */}
