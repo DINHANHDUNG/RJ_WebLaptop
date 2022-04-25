@@ -52,6 +52,8 @@ const categorySliceAdmin = createSlice({
         const { result } = action.payload;
         console.log("result", result);
         let newArr = [] as any;
+
+        
         result?.map((value: any) => {
           let newArrChildren = [] as any;
 
@@ -60,6 +62,7 @@ const categorySliceAdmin = createSlice({
               id: val.id,
               id_parent: val.id_parent,
               categoryname: val.categoryname,
+              name_parent: val.name_parent,
               show: val.show,
               children: val.categorytrees,
             });
@@ -69,6 +72,7 @@ const categorySliceAdmin = createSlice({
             id: value.id,
             id_parent: value.id_parent,
             categoryname: value.categoryname,
+            name_parent: value.name_parent,
             show: value.show,
             children: newArrChildren,
           });

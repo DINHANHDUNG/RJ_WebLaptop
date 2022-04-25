@@ -15,6 +15,7 @@ interface propsModalCategory {
     id: number;
     id_parent: number;
     categoryname: string;
+    name_parent?: any;
   };
 }
 function ModalCategory(props: propsModalCategory) {
@@ -79,39 +80,47 @@ function ModalCategory(props: propsModalCategory) {
         initialValues={{
           categoryname: props.value.categoryname,
           idcategory: props.value.id_parent,
+          dmcha: props.value.name_parent,
         }}
         onFinish={onFinish}
         autoComplete="off"
       >
-        <Form.Item
-          label="Danh mục cha"
-          name="idcategory"
-          // rules={[{ required: true, message: "Chọn danh mục!" }]}
-        >
-          <Select
-            showSearch
-            size="large"
-            placeholder="Chọn danh mục cha"
-            optionFilterProp="children"
-            // onChange={onChange}
-            // onSearch={onSearch}
-            style={{ minWidth: "60px", marginRight: "props.pageSizepx" }}
-            filterOption={(input, option: any) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-            filterSort={(optionA: any, optionB: any) =>
-              optionA.children
-                .toLowerCase()
-                .localeCompare(optionB.children.toLowerCase())
-            }
+        {props.value.id ? (
+          <Form.Item label="Danh mục cha " name="dmcha">
+            <Input disabled />
+          </Form.Item>
+        ) : (
+          <Form.Item
+            label="Danh mục cha"
+            name="idcategory"
+            // rules={[{ required: true, message: "Chọn danh mục!" }]}
           >
-            {valueSelect.map((item: any) => (
-              <Option value={item.id} key={item.id}>
-                {item.categoryname}
-              </Option>
-            ))}
-          </Select>
-        </Form.Item>
+            <Select
+              showSearch
+              size="large"
+              placeholder="Chọn danh mục cha"
+              optionFilterProp="children"
+              // onChange={onChange}
+              // onSearch={onSearch}
+              style={{ minWidth: "60px", marginRight: "props.pageSizepx" }}
+              filterOption={(input, option: any) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+              filterSort={(optionA: any, optionB: any) =>
+                optionA.children
+                  .toLowerCase()
+                  .localeCompare(optionB.children.toLowerCase())
+              }
+            >
+              {valueSelect.map((item: any) => (
+                <Option value={item.id} key={item.id}>
+                  {item.categoryname}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+        )}
+
         <Form.Item
           label="Tên "
           name="categoryname"

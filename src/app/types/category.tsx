@@ -2,6 +2,7 @@ export interface Category {
   id: number;
   id_parent: number;
   categoryname: string;
+  name_parent: string;
   show: boolean;
   children: Array<Category>;
 }

@@ -68,14 +68,26 @@ function Category() {
       key: "action",
       render: () => (
         <Space size="middle">
-          <a
-            style={{ color: "#0f94c7" }}
+          <Button
             onClick={() => {
               setVisible2(true);
             }}
           >
             Thêm
-          </a>
+          </Button>
+
+          <Popconfirm
+            title="Xóa danh mục sẽ xóa hết sản phẩm trong danh mục đó, bạn có chắc muốn xóa không？"
+            okText="Có"
+            cancelText="Không"
+            onConfirm={() =>
+              dispatch(postDeleteCategoryAdmin({ id: [value.id] })).then(() =>
+                dispatch(getAllCategoryTrees())
+              )
+            }
+          >
+            <Button>Xóa</Button>
+          </Popconfirm>
         </Space>
       ),
     },

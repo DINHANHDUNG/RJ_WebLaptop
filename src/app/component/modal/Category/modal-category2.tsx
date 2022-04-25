@@ -64,7 +64,7 @@ function ModalCategory2(props: propsModalCategory) {
       onCancel={() => props.toggle()}
       okText={"Thêm"}
       cancelText={"Hủy"}
-      width={800}
+      width={1000}
       footer={null}
     >
       <Form
@@ -73,13 +73,17 @@ function ModalCategory2(props: propsModalCategory) {
         form={form}
         // wrapperCol={{ span: 16 }}
         initialValues={{
-          categoryname: props.value.categoryname,
+          categoryname: "",
+          dmcha: props.value.categoryname,
           idcategory: props.value.id_parent,
         }}
         onFinish={onFinish}
         autoComplete="off"
       >
-        <Form.Item
+        <Form.Item label="Danh mục cha " name="dmcha">
+          <Input disabled />
+        </Form.Item>
+        {/* <Form.Item
           label="Danh mục cha"
           name="idcategory"
           // rules={[{ required: true, message: "Chọn danh mục!" }]}
@@ -107,9 +111,9 @@ function ModalCategory2(props: propsModalCategory) {
               </Option>
             ))}
           </Select>
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item
-          label="Tên "
+          label="Tên danh mục: "
           name="categoryname"
           rules={[{ required: true, message: "Nhập tên danh mục!" }]}
         >
