@@ -59,7 +59,7 @@ function DetailProduct() {
                         <span>{Numberformat(products.listproduct[0].price_sale)} VNĐ</span>
                         &nbsp;
                         <del style={{ fontSize: "13px", opacity: "0.4" }}>
-                          {Numberformat(products.listproduct[0].price_sale)} VNĐ
+                          {Numberformat(products.listproduct[0].price_origin)} VNĐ
                         </del>{" "}
                         
                         
