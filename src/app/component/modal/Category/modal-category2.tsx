@@ -17,39 +17,35 @@ interface propsModalCategory {
     categoryname: string;
   };
 }
-function ModalCategory(props: propsModalCategory) {
+function ModalCategory2(props: propsModalCategory) {
+  console.log(props);
+
   const dispatch = useAppDispatch();
   const { Option } = Select;
   const [form] = Form.useForm();
   useEffect(() => {
-    form
-      .resetFields
-      //   {
-      //   categorycode: props.value.categorycode,
-      //   categoryname: props.value.categoryname,
-      // }
-      ();
+    form.resetFields();
   }, [props.value.id]);
 
   function onFinish(value: any) {
-    if (props.value.id > 0) {
-      // Sửa
-      dispatch(
-        postEditCategoryByIdAdmin({
-          id: props.value.id,
-          id_parent: value.idcategory ? value.idcategory : null,
-          categoryname: value.categoryname,
-        })
-      ).then(() => dispatch(getAllCategoryTrees()));
-    } else {
-      // Thêm
-      dispatch(
-        postAddCategoryByIdAdmin({
-          id_parent: value.idcategory ? value.idcategory : null,
-          categoryname: value.categoryname,
-        })
-      ).then(() => dispatch(getAllCategoryTrees()));
-    }
+    // if (props.value.id > 0) {
+    //   // Sửa
+    //   dispatch(
+    //     postEditCategoryByIdAdmin({
+    //       id: props.value.id,
+    //       id_parent: value.idcategory ? value.idcategory : null,
+    //       categoryname: value.categoryname,
+    //     })
+    //   ).then(() => dispatch(getAllCategoryTrees()));
+    // } else {
+    // Thêm
+    dispatch(
+      postAddCategoryByIdAdmin({
+        id_parent: props.value.id ? props.value.id : null,
+        categoryname: value.categoryname,
+      })
+    ).then(() => dispatch(getAllCategoryTrees()));
+    // }
   }
 
   //Select
@@ -61,7 +57,7 @@ function ModalCategory(props: propsModalCategory) {
 
   return (
     <Modal
-      title={props.value?.id > 0 ? "Sửa danh mục" : "Thêm danh mục"}
+      title={"Thêm danh mục"}
       centered
       visible={props.visible}
       onOk={() => props.toggle()}
@@ -124,7 +120,7 @@ function ModalCategory(props: propsModalCategory) {
           wrapperCol={{ offset: props.value?.id > 0 ? 21 : 20, span: 24 }}
         >
           <Button type="primary" htmlType="submit">
-            {props.value?.id > 0 ? "Sửa" : "Thêm"}
+            {"Thêm"}
           </Button>
         </Form.Item>
       </Form>
@@ -132,4 +128,4 @@ function ModalCategory(props: propsModalCategory) {
   );
 }
 
-export default ModalCategory;
+export default ModalCategory2;

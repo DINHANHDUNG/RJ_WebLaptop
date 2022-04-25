@@ -7,7 +7,7 @@ function SlickCarousel(props: { value: any }) {
     dots: true,
     infinite: true,
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 1,
     pauseOnHover: true,
     autoplay: true,
     speed: 2000,

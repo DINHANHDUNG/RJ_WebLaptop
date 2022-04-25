@@ -11,7 +11,6 @@ function HeaderCustomer() {
       <HeaderMiddle />
 
       <HeaderBottom />
-      
     </header>
   );
 }

@@ -110,7 +110,7 @@ function ModalProduct(props: propsModalProduct) {
     });
 
     console.log(arrIMG);
-    if (arrIMG.length > 0) {
+    if (arrIMG.length >= 5) {
       if (props.value.id > 0) {
         // Sửa
         console.log("Sửa", value);
@@ -155,7 +155,7 @@ function ModalProduct(props: propsModalProduct) {
       }
     } else {
       openNotification({
-        message: "Chọn ảnh",
+        message: "Chọn ít nhất 5 ảnh",
         type: "error",
       });
     }

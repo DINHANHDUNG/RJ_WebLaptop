@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 // import { getAllCategoryAdmin } from "../../../features/admin/categoryAdnim";
 import { getAllCategoryProductAdmin } from "../../../features/admin/categoryProductAdnim";
-import { getAllProductAdmin } from "../../../features/admin/productAdnim";
+import { getAllProductByDMSPAdmin } from "../../../features/admin/productAdnim";
 import { useAppSelector } from "../../commom/hooks";
 import {
   categoryAdminStore,
@@ -13,7 +13,7 @@ import {
 } from "../../commom/use-selector";
 import ItemProduct from "../../component/customer/product/item-product/item-product";
 
-function ProductByCategory() {
+function ProductByCategoryProduct() {
   const history = useNavigate();
   const { ID } = useParams();
   const [page, setPage] = useState(1);
@@ -37,9 +37,9 @@ function ProductByCategory() {
     );
     if (ID) {
       dispatch(
-        getAllProductAdmin({
-          id_category: Number(ID),
-          // id_category: 0,
+        getAllProductByDMSPAdmin({
+          id_dmsp: Number(ID),
+          // id_dmsp: 0,
           page: page,
           noitem: pageSize,
         })
@@ -61,7 +61,6 @@ function ProductByCategory() {
                   category.listcategory.filter((e) => e.id === Number(ID))[0]
                     ?.categoryname
                 } */}
-
                 Danh sách sản phẩm
               </div>
             </div>
@@ -96,8 +95,8 @@ function ProductByCategory() {
                     console.log(page, pageSizeNew);
                     setPage(page);
                     dispatch(
-                      getAllProductAdmin({
-                        id_category: Number(ID),
+                      getAllProductByDMSPAdmin({
+                        id_dmsp: Number(ID),
                         page: page,
                         noitem: pageSizeNew ? pageSizeNew : pageSize,
                       })
@@ -155,4 +154,4 @@ function ProductByCategory() {
   );
 }
 
-export default ProductByCategory;
+export default ProductByCategoryProduct;

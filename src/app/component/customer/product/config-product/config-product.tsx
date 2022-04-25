@@ -1,4 +1,5 @@
 import React from "react";
+import { Numberformat } from "../../../../commom/hooks";
 import { Product } from "../../../../types/product";
 
 function ConfigProduct(props: { value: Product }) {
@@ -10,9 +11,13 @@ function ConfigProduct(props: { value: Product }) {
         <div className="icon-box icon-box-card text-center">
           <div className="icon-box-content">
             {/* <h3 className="icon-box-title">(New) Core i3-1115G4, Ram 4GB, SSD 256GB, FHD </h3> */}
-            <p>{props.value.configuration}</p>
+            <p style={{ textTransform: "uppercase" }}>
+              {props.value.configuration}
+            </p>
 
-            <p className="box-price">{props.value.price_sale} VNĐ</p>
+            <p className="box-price">
+              {Numberformat(props.value.price_sale)} VNĐ
+            </p>
           </div>
         </div>
       </div>

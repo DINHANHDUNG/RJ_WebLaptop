@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllCategoryAdmin } from "../../../../features/admin/categoryAdnim";
+import { getAllCategoryTrees } from "../../../../features/admin/categoryAdnim";
 import { useAppSelector } from "../../../commom/hooks";
 import { categoryAdminStore } from "../../../commom/use-selector";
 
@@ -9,7 +9,7 @@ function HeaderBottom() {
   const category = useAppSelector(categoryAdminStore);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllCategoryAdmin());
+    dispatch(getAllCategoryTrees());
   }, []);
 
   // console.log(
@@ -17,6 +17,7 @@ function HeaderBottom() {
   //     return item;
   //   })
   // );
+  console.log(category);
 
   return (
     <div className="header-bottom sticky-header">
@@ -29,36 +30,36 @@ function HeaderBottom() {
                 <a href="/">Trang chủ</a>
               </li>
 
-              {/* <li>
-                <a href="#" className="sf-with-ul">
-                  Dịch vụ
-                </a>
+              {category.listcategory?.map((val) => (
+                <li>
+                  <Link
+                    className={val.children?.length > 0 ? "sf-with-ul" : ""}
+                    to={`danhmuc/${val.id}`}
+                  >
+                    {val.categoryname}
+                  </Link>
 
-                <ul>
-                  <li>
-                    <Link to={"category/asus"}>Nâng cấp</Link>
-
+                  {val.children?.map((v) => (
                     <ul>
                       <li>
-                        <Link to={"category/asus"}>Pin</Link>
-                      </li>
-                      <li>
-                        <Link to={"category/asus"}>Bàn phím</Link>
-                      </li>
-                      <li>
-                        <Link to={"category/asus"}>Màn hình</Link>
+                        <Link to={`danhmuc/${v.id}`}>{v.categoryname}</Link>
+
+                        {v.children?.map((e) => (
+                          <ul>
+                            <li>
+                              <Link to={`danhmuc/${e.id}`}>
+                                {e.categoryname}
+                              </Link>
+                            </li>
+                          </ul>
+                        ))}
                       </li>
                     </ul>
-                  </li>
-                  <li>
-                    <Link to={"category/asus"}>Sửa chữa</Link>
-                  </li>
-                  <li>
-                    <Link to={"category/asus"}>Dịch vụ khác</Link>
-                  </li>
-                </ul>
-              </li> */}
-              <li>
+                  ))}
+                </li>
+              ))}
+
+              {/* <li>
                 <a href="#" className="sf-with-ul">
                   Laptop
                 </a>
@@ -66,73 +67,30 @@ function HeaderBottom() {
                 <ul>
                   {category.listcategory.map((val) => (
                     <li>
-                      <Link to={`laptop/${val.id}`}>{val.categoryname}</Link>
+                      <Link to={`danhmuc/${val.id}`}>{val.categoryname}</Link>
+
+                      {val.children?.map((v) => (
+                        <ul>
+                          <li>
+                            <Link to={`danhmuc/${v.id}`}>{v.categoryname}</Link>
+                            <ul>
+                              {v.children?.map((e) => (
+                                <li>
+                                  <Link to={`danhmuc/${v.id}`}>
+                                    {v.categoryname}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                        </ul>
+                      ))}
                     </li>
                   ))}
 
-                  {/* <li>
-                    <a href="#">Grid</a>
-                    <ul>
-                      <li>
-                        <a href="blog-grid-2cols.html">Grid 2 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-grid-3cols.html">Grid 3 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-grid-4cols.html">Grid 4 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-grid-sidebar.html">Grid sidebar</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="#">Masonry</a>
-                    <ul>
-                      <li>
-                        <a href="blog-masonry-2cols.html">Masonry 2 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-masonry-3cols.html">Masonry 3 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-masonry-4cols.html">Masonry 4 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-masonry-sidebar.html">Masonry sidebar</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="#">Mask</a>
-                    <ul>
-                      <li>
-                        <a href="blog-mask-grid.html">Blog mask grid</a>
-                      </li>
-                      <li>
-                        <a href="blog-mask-masonry.html">Blog mask masonry</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="#">Single Post</a>
-                    <ul>
-                      <li>
-                        <a href="single.html">Default with sidebar</a>
-                      </li>
-                      <li>
-                        <a href="single-fullwidth.html">Fullwidth no sidebar</a>
-                      </li>
-                      <li>
-                        <a href="single-fullwidth-sidebar.html">
-                          Fullwidth with sidebar
-                        </a>
-                      </li>
-                    </ul>
-                  </li> */}
+                  
                 </ul>
-              </li>
+              </li> */}
               {/* <li>
                 <a href="elements-list.html" className="sf-with-ul">
                   Elements

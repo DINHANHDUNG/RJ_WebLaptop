@@ -9,6 +9,7 @@ import {
 } from ".";
 import { openNotification } from "../../../app/component/Notifi/noti";
 import { Category, CustomesCategory } from "../../../app/types/category";
+import { getAllCategoryTrees } from "./patchCategory-api";
 const initialStateCategory: CustomesCategory = {
   listcategory: [] as Array<Category>,
   loading: false,
@@ -34,6 +35,51 @@ const categorySliceAdmin = createSlice({
         state.error = false;
       })
       .addCase(getAllCategoryAdmin.rejected, (state) => {
+        state.loading = false;
+        state.error = true; //Show lỗi
+        openNotification({
+          message: "Lấy dữ liệu thất bại",
+          type: "error",
+        });
+      });
+
+    // getAll trees
+    builder
+      .addCase(getAllCategoryTrees.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAllCategoryTrees.fulfilled, (state, action) => {
+        const { result } = action.payload;
+        console.log("result", result);
+        let newArr = [] as any;
+        result?.map((value: any) => {
+          let newArrChildren = [] as any;
+
+          value.categorytrees?.map((val: any) => {
+            newArrChildren.push({
+              id: val.id,
+              id_parent: val.id_parent,
+              categoryname: val.categoryname,
+              show: val.show,
+              children: val.categorytrees,
+            });
+          });
+
+          newArr.push({
+            id: value.id,
+            id_parent: value.id_parent,
+            categoryname: value.categoryname,
+            show: value.show,
+            children: newArrChildren,
+          });
+        });
+
+        state.listcategory = newArr;
+
+        state.loading = false;
+        state.error = false;
+      })
+      .addCase(getAllCategoryTrees.rejected, (state) => {
         state.loading = false;
         state.error = true; //Show lỗi
         openNotification({

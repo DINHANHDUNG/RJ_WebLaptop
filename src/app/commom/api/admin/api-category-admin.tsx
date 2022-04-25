@@ -7,6 +7,11 @@ const categoryAPIAdmin = {
     return axiosClientAdmin.get(url);
   },
 
+  getAllCategoryTree(): Promise<any> {
+    const url = "category/getallcategorytree";
+    return axiosClientAdmin.get(url);
+  },
+
   getCategoryByIdADmin(data: { id: number }): Promise<any> {
     const url = "category/getcategorybyid";
     return axiosClientAdmin.post(url, data);

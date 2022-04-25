@@ -3,10 +3,11 @@ export interface Category {
   id_parent: number;
   categoryname: string;
   show: boolean;
+  children: Array<Category>;
 }
 
 export interface AddCategory {
-  id_parent: number;
+  id_parent?: number | null;
   categoryname: string;
 }
 

@@ -8,7 +8,9 @@ function HeaderMiddle() {
       <div className="container">
         <div className="header-left">
           <button className="mobile-menu-toggler">
-            <span className="sr-only">Toggle mobile menu</span>
+            <span className="sr-only" >
+              Toggle mobile menu
+            </span>
             <i className="fa-solid fa-align-justify"></i>
           </button>
           <a href="/">
@@ -34,7 +36,7 @@ function HeaderMiddle() {
                 <div className="select-custom">
                   <select id="cat" name="cat">
                     <option value="">Tất cả danh mục</option>
-                    <option value="1">Fashion</option>
+                    {/* <option value="1">Fashion</option>
                     <option value="2">- Women</option>
                     <option value="3">- Men</option>
                     <option value="4">- Jewellery</option>
@@ -47,7 +49,7 @@ function HeaderMiddle() {
                     <option value="11">Motors</option>
                     <option value="12">- Cars and Trucks</option>
                     <option value="15">- Boats</option>
-                    <option value="16">- Auto Tools &amp; Supplies</option>
+                    <option value="16">- Auto Tools &amp; Supplies</option> */}
                   </select>
                 </div>
                 <label htmlFor="q" className="sr-only">

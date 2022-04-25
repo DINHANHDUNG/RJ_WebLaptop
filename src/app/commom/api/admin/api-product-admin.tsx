@@ -3,12 +3,18 @@ import {
   AddProduct,
   EditProduct,
   GetAllProductByCategory,
+  GetAllProductByDMSP,
 } from "../../../types/product";
 import axiosClientAdmin from "./axios-clientAdmin";
 
 const productAPIAdmin = {
   getAllProductAdmin(data: GetAllProductByCategory): Promise<any> {
     const url = "product/getallproductbycategory";
+    return axiosClientAdmin.post(url, data);
+  },
+
+  getAllProductbyDMSPAdmin(data: GetAllProductByDMSP): Promise<any> {
+    const url = "product/getallproductbydmsp";
     return axiosClientAdmin.post(url, data);
   },
 

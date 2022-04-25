@@ -12,6 +12,7 @@ import {
 } from ".";
 import { openNotification } from "../../../app/component/Notifi/noti";
 import { CustomesProduct, Product } from "../../../app/types/product";
+import { getAllProductByDMSPAdmin } from "./patchProduct-api";
 const initialState: CustomesProduct = {
   listproduct: [] as Array<Product>,
   total: 0,
@@ -50,7 +51,7 @@ const productSliceAdmin = createSlice({
     },
   },
   extraReducers: (builder: ActionReducerMapBuilder<CustomesProduct>) => {
-    // getAllCustomer
+    // getAllbycategpry
     builder
       .addCase(getAllProductAdmin.pending, (state) => {
         state.loading = true;
@@ -63,6 +64,27 @@ const productSliceAdmin = createSlice({
         state.error = false;
       })
       .addCase(getAllProductAdmin.rejected, (state) => {
+        state.loading = false;
+        state.error = true; //Show lỗi
+        openNotification({
+          message: "Lấy dữ liệu thất bại",
+          type: "error",
+        });
+      });
+
+    // getAllbycategoryProduct
+    builder
+      .addCase(getAllProductByDMSPAdmin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAllProductByDMSPAdmin.fulfilled, (state, action) => {
+        const { result, total } = action.payload;
+        state.listproduct = result;
+        state.total = total;
+        state.loading = false;
+        state.error = false;
+      })
+      .addCase(getAllProductByDMSPAdmin.rejected, (state) => {
         state.loading = false;
         state.error = true; //Show lỗi
         openNotification({

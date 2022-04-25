@@ -50,3 +50,10 @@ export interface GetAllProductByCategory {
   page: number;
   noitem: number;
 }
+
+
+export interface GetAllProductByDMSP {
+  id_dmsp: number;
+  page: number;
+  noitem: number;
+}

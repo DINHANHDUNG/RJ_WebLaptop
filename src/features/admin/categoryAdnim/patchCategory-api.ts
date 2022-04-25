@@ -35,6 +35,16 @@ export const getAllCategoryAdmin = createAsyncThunk(
   }
 );
 
+export const getAllCategoryTrees = createAsyncThunk(
+  "/categoryadmin/getallcategorytrees",
+  async () => {
+    const response = await categoryAPIAdmin.getAllCategoryTree();
+    console.log("getallcategorytrees", response);
+
+    return response;
+  }
+);
+
 export const getCategoryByIdAdmin = createAsyncThunk(
   "/categoryadmin/getbyid",
   async (data: { id: number }) => {

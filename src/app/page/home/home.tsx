@@ -8,11 +8,11 @@ function Home() {
       <Banner />
       <br />
       <br />
-      <SlickCarouselProduct />
+      {/* <SlickCarouselProduct />
 
       <SlickCarouselProduct />
 
-      <SlickCarouselProduct />
+      <SlickCarouselProduct /> */}
     </div>
   );
 }
