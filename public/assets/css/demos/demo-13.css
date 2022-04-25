@@ -1001,6 +1001,7 @@
 
 .icon-box-content {
   position: relative;
+  text-align: left;
 }
 
 .title-boxpromotion {
