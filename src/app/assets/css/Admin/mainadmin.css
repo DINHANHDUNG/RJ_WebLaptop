@@ -1,4 +1,6 @@
-a , p, span{
+a,
+p,
+span {
   font-family: "Roboto";
 }
 
@@ -233,7 +235,7 @@ a , p, span{
 
 .layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item a:hover,
 .layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu a:hover {
-  color: #141414;
+  color: rgb(24 144 255);
 }
 
 .layout-dashboard
@@ -3039,4 +3041,31 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
   svg
   path {
   fill: #8c8c8c;
+}
+
+/* Box price */
+.icon-box-price {
+  /* padding-top: 3rem;
+  padding-bottom: 3.2rem; */
+  border: 0.2rem solid #258cae;
+  background-color: transparent;
+  transition: all 0.3s;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.icon-box-price:hover,
+.icon-box-price:focus {
+  color: #fff;
+  border-color: #258cae;
+  background-color: #258cae;
+}
+
+.icon-box-price:hover .icon-box-title,
+.icon-box-price:hover .icon-box-icon,
+.icon-box-price:hover p,
+.icon-box-price:focus .icon-box-title,
+.icon-box-price:focus .icon-box-icon,
+.icon-box-price:focus p {
+  color: #fff;
 }
