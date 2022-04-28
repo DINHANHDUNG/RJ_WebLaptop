@@ -11,6 +11,7 @@ import {
   categoryProductAdminStore,
   productAdminStore,
 } from "../../commom/use-selector";
+import CategoryProduct from "../../component/customer/category-product/category-product";
 import ItemProduct from "../../component/customer/product/item-product/item-product";
 
 function ProductByCategory() {
@@ -61,7 +62,6 @@ function ProductByCategory() {
                   category.listcategory.filter((e) => e.id === Number(ID))[0]
                     ?.categoryname
                 } */}
-
                 Danh sách sản phẩm
               </div>
             </div>
@@ -115,41 +115,9 @@ function ProductByCategory() {
           </Row>
         </div>
 
-        <aside className="col-lg-3 col-xl-5col order-lg-first">
-          <div className="sidebar sidebar-category">
-            <div className="widget widget-categories">
-              <div className="toolbox">
-                <div className="toolbox-left">
-                  <div
-                    className="toolbox-info"
-                    style={{ fontSize: "18px", color: "#000", fontWeight: 600 }}
-                  >
-                    Danh mục
-                  </div>
-                </div>
-              </div>
-              <nav className="side-nav">
-                <div
-                  style={{
-                    width: "100%",
-                    borderBottom: "1px groove",
-                    opacity: "0.3",
-                  }}
-                ></div>
-                <ul className="menu-vertical sf-arrows">
-                  {categoryproduct.listcategoryproduct?.map((e) => (
-                    <li>
-                      {/* <Link to={''} onClick={()=>{
-                        history("/detail/" + item.product.id);
-                      }}>{e.dmsp_name}</Link> */}
-                      <Link to={`/danhmucsp/${e.id}`}>{e.dmsp_name}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </aside>
+        <CategoryProduct value={categoryproduct} />
+
+        
       </div>
     </div>
   );

@@ -42,6 +42,7 @@ export const getAllCategoryProductAdmin = createAsyncThunk(
   }
 );
 
+
 export const getCategoryProductByIdAdmin = createAsyncThunk(
   "/categoryproductadmin/getbyidcategoryproduct",
   async (data: { id: number }) => {

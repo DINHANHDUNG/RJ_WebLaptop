@@ -51,9 +51,16 @@ export interface GetAllProductByCategory {
   noitem: number;
 }
 
-
 export interface GetAllProductByDMSP {
   id_dmsp: number;
+  page: number;
+  noitem: number;
+}
+
+export interface GetSearchProduct {
+  productKey: string| null;
+  minprice: number | null;
+  maxprice: number | null;
   page: number;
   noitem: number;
 }

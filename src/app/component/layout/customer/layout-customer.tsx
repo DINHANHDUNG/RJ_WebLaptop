@@ -7,6 +7,7 @@ import Error404 from "../../../page/Error404/error404";
 import Home from "../../../page/home/home";
 import ProductByCategoryProduct from "../../../page/product-by-category-product/product-by-category-product";
 import ProductByCategory from "../../../page/product-by-category/product-by-category";
+import ProductSearch from "../../../page/product-search/product-search";
 import Banner from "../../customer/banner/banner";
 import Footer from "../../customer/footer/footer";
 import HeaderCustomer from "../../customer/header/header-component";
@@ -18,7 +19,7 @@ function LayoutCustomer() {
   return (
     <div>
       <div className="page-wrapper">
-        <HeaderCustomer  />
+        <HeaderCustomer />
         <Routes>
           <Route index element={<Home />} />
           <Route path="detailproduct/:ID" element={<DetailProduct />}></Route>
@@ -27,12 +28,16 @@ function LayoutCustomer() {
             path="danhmucsp/:ID"
             element={<ProductByCategoryProduct />}
           ></Route>
+          <Route
+            path="search/:productKey/:minprice/:maxprice"
+            element={<ProductSearch />}
+          ></Route>
           <Route path="*" element={<Error404 />}></Route>
         </Routes>
         <Footer />
       </div>
       <Mobilemenu />
-      
+
       <button id="scroll-top" title="Back to Top">
         <i className="fa-solid fa-angles-up"></i>
       </button>

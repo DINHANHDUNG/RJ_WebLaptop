@@ -1,5 +1,6 @@
 import { Col, Row } from "antd";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getProductHomePage } from "../../../features/homepage";
 import { useAppDispatch, useAppSelector } from "../../commom/hooks";
 import { productHomePageStore } from "../../commom/use-selector";
@@ -11,6 +12,7 @@ import SlickCarouselHomePage from "../../component/slickCarousel/slickProductHom
 
 function Home() {
   const dispatch = useAppDispatch();
+  const history = useNavigate();
   const products = useAppSelector(productHomePageStore);
   useEffect(() => {
     dispatch(getProductHomePage());
@@ -18,20 +20,21 @@ function Home() {
 
   const arrPrice = [
     { min_price: 2000000, max_price: 4000000 },
-    { min_price: 2000000, max_price: 4000000 },
-    { min_price: 2000000, max_price: 4000000 },
-    { min_price: 2000000, max_price: 4000000 },
-    { min_price: 2000000, max_price: 4000000 },
-    { min_price: 5000000, max_price: undefined },
-  ] as Array<{ min_price: number; max_price: number | undefined }>;
+    { min_price: 4000000, max_price: 6000000 },
+    { min_price: 6000000, max_price: 8000000 },
+    { min_price: 8000000, max_price: 1000000 },
+    { min_price: 10000000, max_price: 15000000 },
+    { min_price: 15000000, max_price: null },
+  ] as Array<{ min_price: number; max_price: number | null }>;
 
   console.log(products);
 
   function toggleBoxPrice(value: {
     min_price: number;
-    max_price: number | undefined;
+    max_price: number | null;
   }) {
     console.log(value);
+    history("/search/" + `${null}` + "/" + value.min_price + "/" + value.max_price);
   }
 
   return (
@@ -39,7 +42,7 @@ function Home() {
       <Banner />
       <br />
       <br />
-      
+
       <h2 className="title title-border">LAPTOP THEO KHOẢNG GIÁ</h2>
       <Row gutter={[16, 8]}>
         {arrPrice.map((val) => (

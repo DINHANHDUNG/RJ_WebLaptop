@@ -2,8 +2,8 @@ import React from "react";
 import { currency } from "../../../../commom/hooks";
 
 interface propsBoxPrice {
-  value: { min_price: number; max_price: number | undefined };
-  toggle: (value: { min_price: number; max_price: number | undefined }) => void;
+  value: { min_price: number; max_price: number | null };
+  toggle: (value: { min_price: number; max_price: number | null }) => void;
 }
 function BoxPrice(props: propsBoxPrice) {
   return (

@@ -1,16 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo2 from "../../../assets/images/logo/logo2.png";
 
 function HeaderMiddle() {
+  const [productkey, setProductkey] = useState("" as string | null);
+  const history = useNavigate();
   return (
     <div className="header-middle">
       <div className="container">
         <div className="header-left">
           <button className="mobile-menu-toggler">
-            <span className="sr-only" >
-              Toggle mobile menu
-            </span>
+            <span className="sr-only">Toggle mobile menu</span>
             <i className="fa-solid fa-align-justify"></i>
           </button>
           <a href="/">
@@ -31,37 +31,36 @@ function HeaderMiddle() {
               {/* <i className="fa-light fa-magnifying-glass"></i> */}
               <i className="fa-brands fa-searchengin"></i>
             </a>
-            <form action="#" method="get">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                history(
+                  "/search/" +
+                    `${productkey}` +
+                    "/" +
+                    `${null}` +
+                    "/" +
+                    `${null}`
+                );
+              }}
+            >
               <div className="header-search-wrapper search-wrapper-wide">
-                <div className="select-custom">
+                {/* <div className="select-custom">
                   <select id="cat" name="cat">
                     <option value="">Tất cả danh mục</option>
-                    {/* <option value="1">Fashion</option>
-                    <option value="2">- Women</option>
-                    <option value="3">- Men</option>
-                    <option value="4">- Jewellery</option>
-                    <option value="5">- Kids Fashion</option>
-                    <option value="6">Electronics</option>
-                    <option value="7">- Smart TVs</option>
-                    <option value="8">- Cameras</option>
-                    <option value="9">- Games</option>
-                    <option value="10">Home &amp; Garden</option>
-                    <option value="11">Motors</option>
-                    <option value="12">- Cars and Trucks</option>
-                    <option value="15">- Boats</option>
-                    <option value="16">- Auto Tools &amp; Supplies</option> */}
                   </select>
-                </div>
-                <label htmlFor="q" className="sr-only">
-                  Search
-                </label>
+                </div> */}
+                <label className="sr-only">Search</label>
                 <input
                   type="search"
                   className="form-control"
-                  name="q"
-                  id="q"
                   placeholder="Tìm kiếm sản phẩm ..."
+                  name="search"
                   required
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setProductkey(e.target.value ? e.target.value : null);
+                  }}
                 />
                 <button className="btn btn-primary" type="submit">
                   <i className="fa-solid fa-magnifying-glass"></i>

@@ -5,6 +5,7 @@ import {
   EditProduct,
   GetAllProductByCategory,
   GetAllProductByDMSP,
+  GetSearchProduct,
 } from "../../../app/types/product";
 
 export const postAddProductByIdAdmin = createAsyncThunk(
@@ -47,6 +48,16 @@ export const getAllProductByDMSPAdmin = createAsyncThunk(
     console.log("data truyền vào getallbydmsp", data);
     const response = await productAPIAdmin.getAllProductbyDMSPAdmin(data);
     console.log("getallbydmsp", response);
+
+    return response;
+  }
+);
+export const getProductSearchAdmin = createAsyncThunk(
+  "/productadmin/getproductsearch",
+  async (data: GetSearchProduct) => {
+    console.log("data truyền vào getproductsearch", data);
+    const response = await productAPIAdmin.getProductSearchAdmin(data);
+    console.log("getproductsearch", response);
 
     return response;
   }

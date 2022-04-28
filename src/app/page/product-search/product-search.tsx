@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 // import { getAllCategoryAdmin } from "../../../features/admin/categoryAdnim";
 import { getAllCategoryProductAdmin } from "../../../features/admin/categoryProductAdnim";
-import { getAllProductByDMSPAdmin } from "../../../features/admin/productAdnim";
+import { getProductSearchAdmin } from "../../../features/admin/productAdnim";
 import { useAppSelector } from "../../commom/hooks";
 import {
   categoryAdminStore,
@@ -14,18 +14,18 @@ import {
 import CategoryProduct from "../../component/customer/category-product/category-product";
 import ItemProduct from "../../component/customer/product/item-product/item-product";
 
-function ProductByCategoryProduct() {
+function ProductSearch() {
   const history = useNavigate();
-  const { ID } = useParams();
+  const { productKey, minprice, maxprice } = useParams();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  console.log(ID);
   const category = useAppSelector(categoryAdminStore);
 
   const products = useAppSelector(productAdminStore);
   const categoryproduct = useAppSelector(categoryProductAdminStore);
 
   console.log(products, categoryproduct, category);
+  console.log(productKey, minprice, maxprice);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -36,17 +36,16 @@ function ProductByCategoryProduct() {
         noitem: 0,
       })
     );
-    if (ID) {
-      dispatch(
-        getAllProductByDMSPAdmin({
-          id_dmsp: Number(ID),
-          // id_dmsp: 0,
-          page: page,
-          noitem: pageSize,
-        })
-      );
-    }
-  }, [ID]);
+    dispatch(
+      getProductSearchAdmin({
+        productKey: productKey ? productKey : "",
+        minprice: minprice ? Number(minprice) : 0,
+        maxprice: maxprice ? Number(maxprice) : null,
+        page: page,
+        noitem: pageSize,
+      })
+    );
+  }, [productKey, minprice, maxprice]);
 
   return (
     <div className="container">
@@ -96,8 +95,10 @@ function ProductByCategoryProduct() {
                     console.log(page, pageSizeNew);
                     setPage(page);
                     dispatch(
-                      getAllProductByDMSPAdmin({
-                        id_dmsp: Number(ID),
+                      getProductSearchAdmin({
+                        productKey: productKey ? productKey : "",
+                        minprice: minprice ? Number(minprice) : 0,
+                        maxprice: maxprice ? Number(maxprice) : 0,
                         page: page,
                         noitem: pageSizeNew ? pageSizeNew : pageSize,
                       })
@@ -116,11 +117,9 @@ function ProductByCategoryProduct() {
         </div>
 
         <CategoryProduct value={categoryproduct} />
-
-       
       </div>
     </div>
   );
 }
 
-export default ProductByCategoryProduct;
+export default ProductSearch;
