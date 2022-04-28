@@ -22,7 +22,7 @@ function Home() {
     { min_price: 2000000, max_price: 4000000 },
     { min_price: 4000000, max_price: 6000000 },
     { min_price: 6000000, max_price: 8000000 },
-    { min_price: 8000000, max_price: 1000000 },
+    { min_price: 8000000, max_price: 10000000 },
     { min_price: 10000000, max_price: 15000000 },
     { min_price: 15000000, max_price: null },
   ] as Array<{ min_price: number; max_price: number | null }>;
