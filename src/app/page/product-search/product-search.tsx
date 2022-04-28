@@ -71,10 +71,10 @@ function ProductSearch() {
               </div>
             </div>
           </div>
-
+            
           <div className="products mb-3">
             <div className="row">
-              {products.listproduct.map((value) => (
+              {products?.listproduct?.map((value) => (
                 <div className="col-6 col-md-4 col-xl-3">
                   <ItemProduct value={value} />
                 </div>

@@ -34,7 +34,9 @@ function Home() {
     max_price: number | null;
   }) {
     console.log(value);
-    history("/search/" + `${null}` + "/" + value.min_price + "/" + value.max_price);
+    history(
+      "/search/" + `${null}` + "/" + value.min_price + "/" + value.max_price
+    );
   }
 
   return (
@@ -46,7 +48,7 @@ function Home() {
       <h2 className="title title-border">LAPTOP THEO KHOẢNG GIÁ</h2>
       <Row gutter={[16, 8]}>
         {arrPrice.map((val) => (
-          <Col span={4}>
+          <Col xs={12} md={4}>
             <BoxPrice value={val} toggle={(value) => toggleBoxPrice(value)} />
           </Col>
         ))}
