@@ -4849,7 +4849,7 @@ p {
   height: 5rem;
   position: fixed;
   right: 50px;
-  bottom: 128px;
+  bottom: 15px;
   z-index: 999;
   color: #cccccc;
   display: none;
@@ -4878,6 +4878,21 @@ p {
   transform: translateY(0);
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
+}
+
+
+.box-bottom-button{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  bottom: 70px;
+  justify-content: space-between;
+  right: 50px;
+  z-index: 999;
+}
+
+.box-bottom-button > img{
+  cursor: pointer;
 }
 @media screen and (min-width: 768px) {
   #scroll-top {

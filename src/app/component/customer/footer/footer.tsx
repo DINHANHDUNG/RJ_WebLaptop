@@ -72,7 +72,7 @@ function Footer() {
                       <span className="widget-about-title">
                         Hỗ trợ khách hàng 24/7
                       </span>
-                      <a href="tel:123456789">0333 968 599</a>
+                      <a href="tel:0355515599">0355 515 599</a>
                     </div>
                     <div className="col-sm-6 col-md-8">
                       <span className="widget-about-title">Thanh toán</span>

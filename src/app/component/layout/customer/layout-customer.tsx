@@ -17,7 +17,7 @@ import Sidenav from "../admin/sidenav";
 
 function LayoutCustomer() {
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <div className="page-wrapper">
         <HeaderCustomer />
         <Routes>
@@ -41,6 +41,22 @@ function LayoutCustomer() {
       <button id="scroll-top" title="Back to Top">
         <i className="fa-solid fa-angles-up"></i>
       </button>
+
+      <div className="box-bottom-button">
+        <a href="https://www.facebook.com/messages/t/775541669472633">
+          <img
+            src="https://laptoptcc.com/wp-content/uploads/2021/08/mess-facebook.png"
+            alt="FB"
+          />
+        </a>
+
+        <a href="https://zalo.me/0355515599">
+          <img
+            src="https://laptoptcc.com/wp-content/uploads/2021/05/zalo.png"
+            alt="FB"
+          />
+        </a>
+      </div>
     </div>
   );
 }
