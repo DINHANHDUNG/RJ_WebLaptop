@@ -1725,7 +1725,8 @@ blockquote.text-white cite span {
   line-height: 1.5;
 }
 .menu li > a {
-  color: #999999;
+  color: #fff;
+  /* color: #999999; */
   font-weight: 300;
   font-size: 1.8rem;
   letter-spacing: 0;
@@ -3757,17 +3758,18 @@ p {
 .header-10 .header-bottom .menu ul,
 .header-10 .header-bottom .menu .megamenu {
   margin-top: 0;
+  background-color: #258cae;
 }
 .header-10 .header-bottom .menu > li:not(:hover):not(.active):not(.show) > a {
   color: #fff;
 }
 
 .header-10 .header-bottom .menu > li:hover a {
-  color: #000 !important;
+  /* color: #000 !important; */
 }
 
 .header-10 .header-bottom .menu > li.active a {
-  color: #000 !important;
+  /* color: #000 !important; */
 }
 .header-10 .header-bottom .mobile-menu-toggler {
   color: #fff;

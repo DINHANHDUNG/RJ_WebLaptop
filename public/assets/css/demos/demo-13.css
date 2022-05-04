@@ -25,7 +25,7 @@
 }
 .header.header-10.header-intro-clearance .header-bottom .menu > li > a:hover,
 .header.header-10.header-intro-clearance .header-bottom .menu > li > a:focus {
-  color: #39f;
+  color: #fff;
 }
 .header.header-10.header-intro-clearance
   .header-bottom
@@ -43,7 +43,7 @@
 .header.header-10.header-intro-clearance .header-bottom .menu > li:focus > a,
 .header.header-10.header-intro-clearance .header-bottom .menu > li.active > a,
 .header.header-10.header-intro-clearance .header-bottom .menu > li.show > a {
-  color: #39f;
+  color: #000;
 }
 .header.header-10.header-intro-clearance
   .header-bottom

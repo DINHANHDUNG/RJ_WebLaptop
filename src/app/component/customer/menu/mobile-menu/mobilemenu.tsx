@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAllCategoryAdmin } from "../../../../../features/admin/categoryAdnim";
 import { useAppSelector } from "../../../../commom/hooks";
 import { categoryAdminStore } from "../../../../commom/use-selector";
 
 function Mobilemenu() {
   const category = useAppSelector(categoryAdminStore);
-
+  const [productkey, setProductkey] = useState("" as string | null);
   const dispatch = useDispatch();
+  const history = useNavigate();
   useEffect(() => {
     // dispatch(getAllCategoryAdmin());
   }, []);
@@ -22,7 +23,15 @@ function Mobilemenu() {
             <i className="fa-solid fa-align-justify"></i>
           </span>
 
-          <form action="#" method="get" className="mobile-search">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              history(
+                "/search/" + `${productkey}` + "/" + `${null}` + "/" + `${null}`
+              );
+            }}
+            className="mobile-search"
+          >
             <label htmlFor="mobile-search" className="sr-only">
               Search
             </label>
@@ -31,10 +40,14 @@ function Mobilemenu() {
               className="form-control"
               name="mobile-search"
               id="mobile-search"
-              placeholder="Search in..."
+              placeholder="Tìm kiếm sản phẩm ..."
+              onChange={(e) => {
+                console.log(e.target.value);
+                setProductkey(e.target.value ? e.target.value : null);
+              }}
               required
             />
-            <button className="btn btn-primary" type="submit">
+            <button className="btn btn-primary close-menu-mobile" type="submit" >
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
