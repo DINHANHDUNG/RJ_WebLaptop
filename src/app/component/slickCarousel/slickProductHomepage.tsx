@@ -11,7 +11,7 @@ function SlickCarouselHomePage(props: propsSlide) {
   const settings = {
     // dots: true,
     infinite: true,
-    slidesToShow: 4,
+    slidesToShow: props.value.products.length ? props.value.products.length : 0,
     slidesToScroll: 1,
     pauseOnHover: true,
     autoplay: true,
@@ -50,7 +50,9 @@ function SlickCarouselHomePage(props: propsSlide) {
 
   return (
     <div>
-      <h2 className="title title-border">{props.value.categoryname}</h2>
+      <h2 className="title title-border" style={{ marginTop: "30px" }}>
+        {props.value.categoryname}
+      </h2>
       <Slider {...settings}>
         {props.value.products.map((e) => (
           <div>

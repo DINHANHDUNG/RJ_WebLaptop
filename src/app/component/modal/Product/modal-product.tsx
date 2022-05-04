@@ -181,12 +181,12 @@ function ModalProduct(props: propsModalProduct) {
   console.log(fileIMG);
 
   function deleteIMG(value: any) {
-    console.log("Đang xóa");
+    console.log("Đang xóa", value);
 
-    if (value.split(".").length > 1) {
+    if (value.imagename.split(".").length > 1) {
       uploadIMGAdminAPI
         .postDeleteIMG({
-          imageName: value,
+          imageName: value.imagename,
         })
         .then((res) => {
           console.log("Thành công");
@@ -195,7 +195,7 @@ function ModalProduct(props: propsModalProduct) {
     setFileIMG((pre: any) => {
       console.log(pre);
 
-      return [pre.filter((values: any) => values != value)];
+      return pre.filter((values: any) => values.imagename != value.imagename);
     });
   }
 
