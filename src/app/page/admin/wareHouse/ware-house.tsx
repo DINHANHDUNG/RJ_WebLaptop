@@ -97,6 +97,15 @@ function WareHouse() {
       key: "numberoutput",
       sorter: (a: any, b: any) => a.numberoutput.localeCompare(b.numberoutput),
     },
+
+    {
+      title: "Số lượng tồn",
+      dataIndex: "numberinventory",
+      key: "numberinventory",
+      render: (text: any, row: any, index: any) =>
+        row.numberinput - row.numberoutput,
+      // sorter: (a: any, b: any) => a.numberinventory.localeCompare(b.numberinventory),
+    },
   ];
 
   // rowSelection object indicates the need for row selection
