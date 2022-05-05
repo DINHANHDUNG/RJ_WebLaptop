@@ -114,7 +114,17 @@ function WareHouse() {
   };
 
   const onSearch = (e: any) => setValueSearch(e.target.value);
-
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      dispatch(
+        getSearchWareHouseProductAdmin({
+          productkey: valueSearch,
+          page: 1,
+          noitem: pageSize,
+        })
+      );
+    }
+  };
   return (
     <div className="tabled" style={{ marginBottom: "20px" }}>
       <Row gutter={[24, 0]}>
@@ -197,6 +207,7 @@ function WareHouse() {
                       onChange={onSearch}
                       style={{ width: "100%", marginRight: "10px" }}
                       size="small"
+                      onKeyDown={handleKeyDown}
                     />
                     <Button
                       size="large"
