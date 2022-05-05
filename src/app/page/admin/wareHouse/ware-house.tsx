@@ -86,9 +86,9 @@ function WareHouse() {
 
     {
       title: "Số lượng nhập",
-      dataIndex: "numberoutput",
-      key: "numberoutput",
-      sorter: (a: any, b: any) => a.numberoutput.localeCompare(b.numberoutput),
+      dataIndex: "numberinput",
+      key: "numberinput",
+      sorter: (a: any, b: any) => a.numberinput.localeCompare(b.numberinput),
     },
 
     {
