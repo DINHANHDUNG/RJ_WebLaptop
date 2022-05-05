@@ -44,6 +44,7 @@ function ModalProduct(props: propsModalProduct) {
   console.log(props.value, props.value);
   const formRef: any = React.createRef<FormInstance>();
   const { Option } = Select;
+  const { TextArea } = Input;
   const categorys = useAppSelector(categoryAdminStore);
   const promotion = useAppSelector(promotionAdminStore);
   const categoryproduct = useAppSelector(categoryProductAdminStore);
@@ -61,7 +62,7 @@ function ModalProduct(props: propsModalProduct) {
       });
     }
     setFileIMG(props.value.productimages ? props.value.productimages : []);
-    
+
     // form.setFieldsValue({
     //   id_dmsps: arrid_dmsps,
     // })
@@ -69,9 +70,9 @@ function ModalProduct(props: propsModalProduct) {
     form.resetFields();
   }, [props.value.id]);
 
-  useEffect(()=>{
+  useEffect(() => {
     form.resetFields();
-  },[id_dmsps])
+  }, [id_dmsps]);
 
   useEffect(() => {
     dispatch(
@@ -99,12 +100,12 @@ function ModalProduct(props: propsModalProduct) {
       if (idx === 0) {
         arrIMG.push({
           imagename: val.imagename,
-          type: '1',
+          type: "1",
         });
       } else {
         arrIMG.push({
           imagename: val.imagename,
-          type: '2',
+          type: "2",
         });
       }
     });
@@ -251,7 +252,7 @@ function ModalProduct(props: propsModalProduct) {
         initialValues={{
           id_category: props.value.id_category,
           id_promotion: props.value.id_promotion,
-          id_dmsps:id_dmsps,
+          id_dmsps: id_dmsps,
           productcode: props.value.productcode,
           productname: props.value.productname,
           configuration: props.value.configuration,
@@ -428,7 +429,7 @@ function ModalProduct(props: propsModalProduct) {
           name="describe"
           rules={[{ required: true, message: "Nhập tên sản phẩm!" }]}
         >
-          <Input />
+          <TextArea rows={6} />
         </Form.Item>
 
         <Form.Item

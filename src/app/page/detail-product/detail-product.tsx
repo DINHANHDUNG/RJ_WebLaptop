@@ -1,4 +1,4 @@
-import { Image } from "antd";
+import { Image, Input } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -13,6 +13,7 @@ import SlickDetailProduct from "../../component/slickCarousel/slickDetailProduct
 function DetailProduct() {
   const { ID } = useParams();
   const dispatch = useDispatch();
+  const { TextArea } = Input;
   const products = useAppSelector(productAdminStore);
   useEffect(() => {
     dispatch(getProductByIdAdmin({ id: Number(ID) }));
@@ -56,13 +57,14 @@ function DetailProduct() {
                         className="product-price"
                         style={{ justifyContent: "left" }}
                       >
-                        <span>{Numberformat(products.listproduct[0].price_sale)} VNĐ</span>
+                        <span>
+                          {Numberformat(products.listproduct[0].price_sale)} VNĐ
+                        </span>
                         &nbsp;
                         <del style={{ fontSize: "13px", opacity: "0.4" }}>
-                          {Numberformat(products.listproduct[0].price_origin)} VNĐ
+                          {Numberformat(products.listproduct[0].price_origin)}{" "}
+                          VNĐ
                         </del>{" "}
-                        
-                        
                       </div>
                       <div className="product-content">
                         {products.listproduct[0].productdetails?.map(
@@ -143,7 +145,12 @@ function DetailProduct() {
                 aria-labelledby="product-desc-link"
               >
                 <div className="product-desc-content">
-                  <p>{products.listproduct[0]?.describe}</p>
+                  {/* <p>{products.listproduct[0]?.describe}</p> */}
+                  <TextArea
+                    rows={20}
+                    value={products.listproduct[0]?.describe}
+                    readOnly
+                  />
                 </div>
               </div>
               <div
