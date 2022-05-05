@@ -6,6 +6,7 @@ import categoryAdminReducer from "../../features/admin/categoryAdnim/category-sl
 import promotionAdminReducer from "../../features/admin/promotion/promotion-slice";
 import productAdminReducer from "../../features/admin/productAdnim/product-slice";
 import ProductHomePageReducer from "../../features/homepage/product-home-page-slice";
+import warehouseReducer from "../../features/admin/wareHouseProductAdnim/ware-house-product-slice";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,9 @@ export const store = configureStore({
     categoryAdmin: categoryAdminReducer,
     promotionAdmin: promotionAdminReducer,
     productAdmin: productAdminReducer,
+    warehouse: warehouseReducer,
+
+    /*Customer */
     ProductHomePage: ProductHomePageReducer,
   },
 });

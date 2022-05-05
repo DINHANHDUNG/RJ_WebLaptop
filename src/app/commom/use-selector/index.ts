@@ -7,6 +7,7 @@ export const productAdminStore = (state: RootState) => state.productAdmin; //S�
 export const categoryProductAdminStore = (state: RootState) =>
   state.categoryProductAdmin; //Danh mục sản phẩm
 export const categoryAdminStore = (state: RootState) => state.categoryAdmin; //Danh mục
+export const wareHouseStore = (state: RootState) => state.warehouse; //Kho
 
 /* ---------------------------------------Home page-------------------------------------------------- */
 

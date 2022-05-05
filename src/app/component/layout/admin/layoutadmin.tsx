@@ -7,6 +7,7 @@ import Category from "../../../page/admin/category/category";
 import CategoryProduct from "../../../page/admin/categoryProduct/category-product";
 import Dashboard from "../../../page/admin/dashboard/dashboard";
 import Promotion from "../../../page/admin/promotion/promotion";
+import WareHouse from "../../../page/admin/wareHouse/ware-house";
 import Login from "../../../page/Login/login";
 import LayoutDashboard from "./layoutdashboard";
 
@@ -41,6 +42,7 @@ function LayoutAdmin() {
         <Route path="/category" element={<Category />} />
         <Route path="/categoryproduct" element={<CategoryProduct />} />
         <Route path="/promotion" element={<Promotion />} />
+        <Route path="/warehouse" element={<WareHouse />} />
         {/* <Route path="/category" element={<Category />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/product" element={<Listproduct />} />
