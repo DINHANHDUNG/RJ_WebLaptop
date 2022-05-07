@@ -27,9 +27,10 @@ const wareHouseSliceAdmin = createSlice({
         state.loading = true;
       })
       .addCase(getAllWareHouseProductAdmin.fulfilled, (state, action) => {
-        const { result } = action.payload;
+        const { result, total } = action.payload;
 
         state.listWareHouse = result;
+        state.total = total;
 
         state.loading = false;
         state.error = false;
