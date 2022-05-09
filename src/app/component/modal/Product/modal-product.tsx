@@ -155,9 +155,55 @@ function ModalProduct(props: propsModalProduct) {
         });
       }
     } else {
+      if (props.value.id > 0) {
+        // Sửa
+        console.log("Sửa", value);
+        dispatch(
+          postEditProductByIdAdmin({
+            ...value,
+            id: props.value.id,
+            price_sale: Number(value.price_sale),
+            price_origin: Number(value.price_origin),
+            productimages: arrIMG,
+          })
+        ).then((res) => {
+          dispatch(
+            getAllProductAdmin({
+              id_category: props.valueInputSelect,
+              page: props.page,
+              noitem: props.pageSize,
+            })
+          );
+          props.toggle();
+        });
+      } else {
+        // Thêm
+        dispatch(
+          postAddProductByIdAdmin({
+            ...value,
+            price_sale: Number(value.price_sale),
+            price_origin: Number(value.price_origin),
+            productimages: arrIMG,
+          })
+        ).then(() => {
+          dispatch(
+            getAllProductAdmin({
+              id_category: props.valueInputSelect,
+              page: props.page,
+              noitem: props.pageSize,
+            })
+          );
+
+          props.toggle();
+        });
+      }
+      // openNotification({
+      //   message: "Chọn ít nhất 5 ảnh",
+      //   type: "error",
+      // });
       openNotification({
-        message: "Chọn ít nhất 5 ảnh",
-        type: "error",
+        message: "Bạn đang chọn ít hơn 5 ảnh sẽ gây lỗi giao diện",
+        type: "warning",
       });
     }
   }
