@@ -15,6 +15,7 @@ import { FormInstance } from "rc-field-form";
 import React, { useEffect, useRef, useState } from "react";
 import {
   getAllProductAdmin,
+  getProductSearchAdmin,
   postAddProductByIdAdmin,
   postEditProductByIdAdmin,
 } from "../../../../features/admin/productAdnim";
@@ -39,6 +40,8 @@ interface propsModalProduct {
   valueInputSelect: number;
   page: number;
   pageSize: number;
+  visibleSearch: boolean;
+  productkey: string;
 }
 function ModalProduct(props: propsModalProduct) {
   console.log(props.value, props.value);
@@ -124,13 +127,26 @@ function ModalProduct(props: propsModalProduct) {
             productimages: arrIMG,
           })
         ).then((res) => {
-          dispatch(
-            getAllProductAdmin({
-              id_category: props.valueInputSelect,
-              page: props.page,
-              noitem: props.pageSize,
-            })
-          );
+          if (props.visibleSearch) {
+            dispatch(
+              getProductSearchAdmin({
+                productKey: props.productkey ? props.productkey : "",
+                minprice: null,
+                maxprice: null,
+                page: props.page,
+                noitem: props.pageSize,
+              })
+            );
+          } else {
+            dispatch(
+              getAllProductAdmin({
+                id_category: props.valueInputSelect,
+                page: props.page,
+                noitem: props.pageSize,
+              })
+            );
+          }
+
           props.toggle();
         });
       } else {
@@ -143,13 +159,25 @@ function ModalProduct(props: propsModalProduct) {
             productimages: arrIMG,
           })
         ).then(() => {
-          dispatch(
-            getAllProductAdmin({
-              id_category: props.valueInputSelect,
-              page: props.page,
-              noitem: props.pageSize,
-            })
-          );
+          if (props.visibleSearch) {
+            dispatch(
+              getProductSearchAdmin({
+                productKey: props.productkey ? props.productkey : "",
+                minprice: null,
+                maxprice: null,
+                page: props.page,
+                noitem: props.pageSize,
+              })
+            );
+          } else {
+            dispatch(
+              getAllProductAdmin({
+                id_category: props.valueInputSelect,
+                page: props.page,
+                noitem: props.pageSize,
+              })
+            );
+          }
 
           props.toggle();
         });

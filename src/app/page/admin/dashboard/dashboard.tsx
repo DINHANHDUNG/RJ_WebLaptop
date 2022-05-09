@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   Col,
+  Input,
   Pagination,
   Popconfirm,
   Row,
@@ -13,6 +14,7 @@ import React, { useEffect, useState } from "react";
 import { getAllCategoryAdmin } from "../../../../features/admin/categoryAdnim";
 import {
   getAllProductAdmin,
+  getProductSearchAdmin,
   postDeleteProductAdmin,
 } from "../../../../features/admin/productAdnim";
 import {
@@ -43,14 +45,15 @@ function Dashboard() {
   const [valueInputSelect, setValueInputSelect] = useState(0);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-
+  const [visibleSearch, setVisibleSearch] = useState(false);
+  const [valueSearch, setValueSearch] = useState("");
   console.log(products);
   useEffect(() => {
     dispatch(getAllCategoryAdmin()).then((res: any) => {
       console.log(res);
 
       // if (res.payload.result[0].id) {
-        
+
       // }
     });
     setValueInputSelect(0);
@@ -166,8 +169,23 @@ function Dashboard() {
   }
 
   function onSearch(val: any) {
-    console.log("search:", val);
+    console.log("search:", val.target.value);
+    setValueSearch(val.target.value);
   }
+
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      dispatch(
+        getProductSearchAdmin({
+          productKey: valueSearch ? valueSearch : "",
+          minprice: null,
+          maxprice: null,
+          page: page,
+          noitem: pageSize,
+        })
+      );
+    }
+  };
 
   return (
     <div className="tabled" style={{ marginBottom: "20px" }}>
@@ -179,6 +197,14 @@ function Dashboard() {
             title="Quản lý sản phẩm theo danh mục"
             extra={
               <>
+                <Button
+                  style={{ marginRight: "10px" }}
+                  onClick={() => {
+                    setVisibleSearch(!visibleSearch);
+                  }}
+                >
+                  Tìm kiếm
+                </Button>
                 <Select
                   showSearch
                   placeholder="Chọn danh mục"
@@ -244,6 +270,44 @@ function Dashboard() {
           >
             <Row gutter={[24, 0]}>
               <Col xl={24}>
+                {visibleSearch && (
+                  <Row gutter={[24, 24]}>
+                    <Col md={10} xs={20} style={{ margin: "20px" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-around",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Input
+                          placeholder="Tìm kiếm"
+                          onChange={onSearch}
+                          style={{ width: "100%", marginRight: "10px" }}
+                          size="small"
+                          onKeyDown={handleKeyDown}
+                        />
+                        <Button
+                          size="large"
+                          onClick={() => {
+                            dispatch(
+                              getProductSearchAdmin({
+                                productKey: valueSearch ? valueSearch : "",
+                                minprice: null,
+                                maxprice: null,
+                                page: page,
+                                noitem: pageSize,
+                              })
+                            );
+                          }}
+                        >
+                          Tìm
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row>
+                )}
                 <div className="table-responsive">
                   <Table
                     columns={columns}
@@ -315,6 +379,8 @@ function Dashboard() {
           valueInputSelect={valueInputSelect}
           page={page}
           pageSize={pageSize}
+          productkey={valueSearch}
+          visibleSearch={visibleSearch}
         />
       )}
     </div>
