@@ -146,7 +146,9 @@ function ModalProduct(props: propsModalProduct) {
               })
             );
           }
-
+          arrImgDelete?.map((value: any) => {
+            deleteImgArr(value);
+          });
           props.toggle();
         });
       } else {
@@ -178,7 +180,9 @@ function ModalProduct(props: propsModalProduct) {
               })
             );
           }
-
+          arrImgDelete?.map((value: any) => {
+            deleteImgArr(value);
+          });
           props.toggle();
         });
       }
@@ -202,6 +206,9 @@ function ModalProduct(props: propsModalProduct) {
               noitem: props.pageSize,
             })
           );
+          arrImgDelete?.map((value: any) => {
+            deleteImgArr(value);
+          });
           props.toggle();
         });
       } else {
@@ -221,7 +228,9 @@ function ModalProduct(props: propsModalProduct) {
               noitem: props.pageSize,
             })
           );
-
+          arrImgDelete?.map((value: any) => {
+            deleteImgArr(value);
+          });
           props.toggle();
         });
       }
@@ -233,6 +242,18 @@ function ModalProduct(props: propsModalProduct) {
         message: "Bạn đang chọn ít hơn 5 ảnh sẽ gây lỗi giao diện",
         type: "warning",
       });
+    }
+  }
+
+  function deleteImgArr(value: any) {
+    if (value.imagename.split(".").length > 1) {
+      uploadIMGAdminAPI
+        .postDeleteIMG({
+          imageName: value.imagename,
+        })
+        .then((res) => {
+          console.log("Thành công");
+        });
     }
   }
 
@@ -252,21 +273,19 @@ function ModalProduct(props: propsModalProduct) {
   const inputRef = useRef(null as any);
   const [fileIMG, setFileIMG] = useState([] as any);
   const [uploading, setUploading] = useState(false);
-
+  const [arrImgDelete, setArrImgDelete] = useState([] as any);
   console.log(fileIMG);
+  console.log(arrImgDelete);
 
   function deleteIMG(value: any) {
     console.log("Đang xóa", value);
 
-    if (value.imagename.split(".").length > 1) {
-      uploadIMGAdminAPI
-        .postDeleteIMG({
-          imageName: value.imagename,
-        })
-        .then((res) => {
-          console.log("Thành công");
-        });
-    }
+    setArrImgDelete((pre: any) => {
+      console.log(pre);
+
+      return [...pre, value];
+    });
+
     setFileIMG((pre: any) => {
       console.log(pre);
 

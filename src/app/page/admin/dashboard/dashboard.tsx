@@ -47,6 +47,7 @@ function Dashboard() {
   const [pageSize, setPageSize] = useState(10);
   const [visibleSearch, setVisibleSearch] = useState(false);
   const [valueSearch, setValueSearch] = useState("");
+  const [arrImgDelete, setArrImgDelete] = useState([] as any);
   console.log(products);
   useEffect(() => {
     dispatch(getAllCategoryAdmin()).then((res: any) => {
