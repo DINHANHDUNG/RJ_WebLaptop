@@ -1,4 +1,4 @@
-import { Col, Pagination, Row } from "antd";
+import { Col, Pagination, Row, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -15,10 +15,12 @@ import CategoryProduct from "../../component/customer/category-product/category-
 import ItemProduct from "../../component/customer/product/item-product/item-product";
 
 function ProductByCategory() {
+  const { Option } = Select;
   const history = useNavigate();
   const { ID } = useParams();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
+  const [sort, setSort] = useState(0);
   console.log(ID);
   const category = useAppSelector(categoryAdminStore);
 
@@ -40,7 +42,7 @@ function ProductByCategory() {
       dispatch(
         getAllProductAdmin({
           id_category: Number(ID),
-          // id_category: 0,
+          sort: sort,
           page: page,
           noitem: pageSize,
         })
@@ -48,6 +50,24 @@ function ProductByCategory() {
     }
   }, [ID]);
 
+  function onChange(value: any) {
+    console.log(`selected ${value}`);
+    setSort(value);
+    setPage(1);
+    dispatch(
+      getAllProductAdmin({
+        id_category: Number(ID),
+        sort: value,
+        page: 1,
+        noitem: pageSize,
+      })
+    );
+  }
+
+  function onSearch(val: any) {
+    console.log("search:", val.target.value);
+    // setValueSearch(val.target.value);
+  }
   return (
     <div className="container">
       <div className="row">
@@ -68,6 +88,30 @@ function ProductByCategory() {
 
             <div className="toolbox-right">
               <div className="toolbox-sort">
+                <Select
+                  showSearch
+                  placeholder="Chọn danh mục"
+                  optionFilterProp="children"
+                  onChange={onChange}
+                  onSearch={onSearch}
+                  style={{ minWidth: "120px", marginRight: "10px" }}
+                  value={sort}
+                  filterOption={(input, option: any) =>
+                    option?.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  <Option value={0} key={0}>
+                    Mới nhất
+                  </Option>
+                  <Option value={1} key={1}>
+                    Tăng dần
+                  </Option>
+                  <Option value={2} key={2}>
+                    Giảm dần
+                  </Option>
+                </Select>
                 {/* <label htmlFor="sortby">Sort by:</label> */}
               </div>
             </div>
@@ -99,6 +143,7 @@ function ProductByCategory() {
                       getAllProductAdmin({
                         id_category: Number(ID),
                         page: page,
+                        sort: sort,
                         noitem: pageSizeNew ? pageSizeNew : pageSize,
                       })
                     );
@@ -116,8 +161,6 @@ function ProductByCategory() {
         </div>
 
         <CategoryProduct value={categoryproduct} />
-
-        
       </div>
     </div>
   );

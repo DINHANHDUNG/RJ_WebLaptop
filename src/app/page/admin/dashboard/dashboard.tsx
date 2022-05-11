@@ -64,6 +64,7 @@ function Dashboard() {
         id_category: 0,
         // id_category: 0,
         page: page,
+        sort: 0,
         noitem: pageSize,
       })
     );
@@ -164,6 +165,7 @@ function Dashboard() {
       getAllProductAdmin({
         id_category: value,
         page: 1,
+        sort: 0,
         noitem: pageSize,
       })
     );
@@ -256,6 +258,7 @@ function Dashboard() {
                             getAllProductAdmin({
                               id_category: valueInputSelect,
                               page: page,
+                              sort: 0,
                               noitem: pageSize,
                             })
                           );
@@ -353,6 +356,7 @@ function Dashboard() {
                       getAllProductAdmin({
                         id_category: valueInputSelect,
                         page: page,
+                        sort: 0,
                         noitem: pageSizeNew ? pageSizeNew : pageSize,
                       })
                     );

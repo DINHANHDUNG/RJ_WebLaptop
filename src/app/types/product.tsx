@@ -45,8 +45,11 @@ export interface CustomesProduct {
   error: boolean;
 }
 
+// sort: 0 là mới nhất, 1 là tăng dần, 2 là giảm dần
+
 export interface GetAllProductByCategory {
   id_category: number;
+  sort: number;
   page: number;
   noitem: number;
 }
@@ -54,11 +57,12 @@ export interface GetAllProductByCategory {
 export interface GetAllProductByDMSP {
   id_dmsp: number;
   page: number;
+  sort: number;
   noitem: number;
 }
 
 export interface GetSearchProduct {
-  productKey: string| null;
+  productKey: string | null;
   minprice: number | null;
   maxprice: number | null;
   page: number;

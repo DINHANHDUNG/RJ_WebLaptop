@@ -141,6 +141,7 @@ function ModalProduct(props: propsModalProduct) {
             dispatch(
               getAllProductAdmin({
                 id_category: props.valueInputSelect,
+                sort: 0,
                 page: props.page,
                 noitem: props.pageSize,
               })
@@ -176,6 +177,7 @@ function ModalProduct(props: propsModalProduct) {
               getAllProductAdmin({
                 id_category: props.valueInputSelect,
                 page: props.page,
+                sort: 0,
                 noitem: props.pageSize,
               })
             );
@@ -203,6 +205,7 @@ function ModalProduct(props: propsModalProduct) {
             getAllProductAdmin({
               id_category: props.valueInputSelect,
               page: props.page,
+              sort: 0,
               noitem: props.pageSize,
             })
           );
@@ -225,6 +228,7 @@ function ModalProduct(props: propsModalProduct) {
             getAllProductAdmin({
               id_category: props.valueInputSelect,
               page: props.page,
+              sort: 0,
               noitem: props.pageSize,
             })
           );
