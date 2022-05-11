@@ -106,10 +106,10 @@ function ProductByCategory() {
                     Mới nhất
                   </Option>
                   <Option value={1} key={1}>
-                    Tăng dần
+                    Giá tăng dần
                   </Option>
                   <Option value={2} key={2}>
-                    Giảm dần
+                    Giá giảm dần
                   </Option>
                 </Select>
                 {/* <label htmlFor="sortby">Sort by:</label> */}
