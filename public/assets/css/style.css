@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,900&display=swap');
+﻿@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,900&display=swap");
 html {
   font-size: 62.5%;
   -webkit-text-size-adjust: 100%;
@@ -4882,8 +4882,7 @@ p {
   -ms-transform: translateY(0);
 }
 
-
-.box-bottom-button{
+.box-bottom-button {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -4893,7 +4892,7 @@ p {
   z-index: 999;
 }
 
-.box-bottom-button > img{
+.box-bottom-button > img {
   cursor: pointer;
 }
 @media screen and (min-width: 768px) {
@@ -6672,7 +6671,7 @@ p {
 }
 .ratings:before,
 .ratings-val:before {
-  content: "\f318" "\f318" "\f318" "\f318" "\f318";
+  content: "\f318""\f318""\f318""\f318""\f318";
 }
 .ratings-val {
   position: absolute;
@@ -16363,8 +16362,8 @@ button:focus {
 }
 /*# sourceMappingURL=style.css.map */
 
-
-.fa-cart-shopping:before, .fa-shopping-cart:before {
+.fa-cart-shopping:before,
+.fa-shopping-cart:before {
   content: "\f07a";
   font-size: 25px;
 }

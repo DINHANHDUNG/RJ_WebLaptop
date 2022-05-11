@@ -56,7 +56,7 @@ function Footer() {
                 />
 
                 <p>
-                  <span style={{ fontWeight: 600 }}>Địa chỉ</span>: Số 2 - Chợ
+                  <span style={{ fontWeight: 600 }}>Địa chỉ</span>: Số 20 - Chợ
                   Tre - Từ Sơn - Bắc Ninh
                 </p>
                 <br />

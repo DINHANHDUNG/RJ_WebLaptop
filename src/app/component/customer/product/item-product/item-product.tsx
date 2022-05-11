@@ -7,8 +7,8 @@ interface propsProduct {
   value: Product;
 }
 function ItemProduct(props: propsProduct) {
-  console.log( props.value);
-  
+  console.log(props.value);
+
   return (
     <div className="product">
       <figure className="product-media">
@@ -37,7 +37,12 @@ function ItemProduct(props: propsProduct) {
               <a href="#">Laptops</Link>
             </div> */}
         <h3 className="product-title">
-          <Link to={"/detailproduct/" + props.value.id}>{props.value.productname}</Link>
+          <Link
+            title={props.value.productname}
+            to={"/detailproduct/" + props.value.id}
+          >
+            {props.value.productname}
+          </Link>
         </h3>
         <p className="product-describe">{props.value.describe}</p>
         <div className="product-price">

@@ -23,6 +23,7 @@ function Banner() {
               "url(https://tinhocmiennam.com/wp-content/uploads/2018/06/laptop-banner.jpg)",
           }}
         >
+          {/* https://file.hstatic.net/200000316561/file/uu-dai-tuan-thanh-informatics-23_ea092b1fff0c4eebba2f66995908f7d3.png */}
           <div className="container intro-content">
             <div className="row">
               <div className="col-auto offset-lg-3 intro-col">

@@ -18,7 +18,7 @@ function ProductByCategory() {
   const history = useNavigate();
   const { ID } = useParams();
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(12);
   console.log(ID);
   const category = useAppSelector(categoryAdminStore);
 
