@@ -28,7 +28,7 @@ function DetailProduct() {
           <div className="product-details-top mb-2">
             {products.listproduct[0]?.id > 0 ? (
               <>
-                <div className="row">
+                <div className="row" >
                   <div className="col-md-6">
                     <div className="product-gallery">
                       <figure className="product-main-image">

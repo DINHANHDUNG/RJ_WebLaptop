@@ -47,7 +47,7 @@ function Mobilemenu() {
               }}
               required
             />
-            <button className="btn btn-primary close-menu-mobile" type="submit" >
+            <button className="btn btn-primary close-menu-mobile" type="submit">
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
@@ -109,13 +109,13 @@ function Mobilemenu() {
 
                   {category.listcategory?.map((val) => (
                     <li key={val.id}>
-                      <Link to={`laptop/${val.id}`}>{val.categoryname}</Link>
-                      <ul>
+                      <Link to={`danhmuc/${val.id}`}>{val.categoryname}</Link>
+                      <ul style={{ display: "block" }}>
                         {val.children?.map((v) => (
                           <li>
                             <Link to={`danhmuc/${v.id}`}>{v.categoryname}</Link>
                             {v.children?.length > 0 ? (
-                              <ul>
+                              <ul style={{ display: "block" }}>
                                 {v.children?.map((e) => (
                                   <li>
                                     <Link to={`danhmuc/${e.id}`}>
@@ -131,17 +131,17 @@ function Mobilemenu() {
                     </li>
                   ))}
 
-                  <li>
+                  {/* <li>
                     <Link to="category.html">Shop</Link>
                     <ul>
                       <li>
-                        <a href="category-list.html">Shop List</a>
+                        <Link to="category-list.html">Shop List</Link>
                       </li>
                       <li>
-                        <a href="category-2cols.html">Shop Grid 2 Columns</a>
+                        <Link to="category-2cols.html">Shop Grid 2 Columns</Link>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
                 </ul>
               </nav>
             </div>
@@ -195,9 +195,9 @@ function Mobilemenu() {
             </div>
           </div>
 
-          <div className="social-icons">
+          {/* <div className="social-icons">
             <a
-              href="#"
+              href="https://www.facebook.com/messages/t/775541669472633"
               className="social-icon"
               target="_blank"
               title="Facebook"
@@ -218,7 +218,7 @@ function Mobilemenu() {
             <a href="#" className="social-icon" target="_blank" title="Youtube">
               <i className="icon-youtube"></i>
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
