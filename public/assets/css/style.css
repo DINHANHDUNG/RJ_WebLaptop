@@ -6396,7 +6396,9 @@ p {
 .product-image {
   display: block;
   width: 100%;
-  height: auto;
+  /* height: auto; */
+  height: 250px;
+  object-fit: cover;
 }
 .product-image-hover {
   position: absolute;
