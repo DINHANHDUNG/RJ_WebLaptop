@@ -8,14 +8,21 @@ interface propsSlide {
   value: ProductHomePage;
 }
 function SlickCarouselHomePage(props: propsSlide) {
-  console.log('props', props);
+  console.log("props", props);
 
   const settings = {
     // dots: true,
     arrows: true,
-    infinite: true,
-    slidesToShow: props.value.products.length > 1 ? 3 : 0,
-    slidesToScroll: 1,
+    // infinite: true,
+    slidesToShow:
+      props.value.products.length < 3
+        ? props.value.products.length < 2
+          ? props.value.products.length < 1
+            ? 0
+            : 1
+          : 2
+        : 3,
+    slidesToScroll: 3,
     pauseOnHover: true,
     autoplay: true,
     speed: 2000,
