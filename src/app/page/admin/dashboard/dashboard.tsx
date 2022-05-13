@@ -100,6 +100,19 @@ function Dashboard() {
       sorter: (a: any, b: any) => a.productname.localeCompare(b.productname),
     },
 
+    // {
+    //   title: "Danh mục sản phẩm",
+    //   dataIndex: "category",
+    //   key: "category",
+    //   render: (text: any, row: any, index: any) => {
+    //     console.log(row);
+
+    //     return row.product_dmsps.map((value: any, idx: any) => (
+    //       <p key={idx}>{value.dmsp.dmsp_name}</p>
+    //     ));
+    //   },
+    // },
+
     {
       title: "Giá gốc",
       dataIndex: "price_origin",

@@ -28,7 +28,7 @@ function DetailProduct() {
           <div className="product-details-top mb-2">
             {products.listproduct[0]?.id > 0 ? (
               <>
-                <div className="row" >
+                <div className="row">
                   <div className="col-md-6">
                     <div className="product-gallery">
                       <figure className="product-main-image">
@@ -50,9 +50,11 @@ function DetailProduct() {
 
                   <div className="col-md-6">
                     <div className="product-details">
-                      <h1 className="product-title">
+                      <h1 className="product-title animate-charcter">
                         {products.listproduct[0].productname}
                       </h1>
+                      
+                      
                       <div
                         className="product-price"
                         style={{ justifyContent: "left" }}
@@ -66,6 +68,14 @@ function DetailProduct() {
                           VNĐ
                         </del>{" "}
                       </div>
+
+                      {products.listproduct[0].product_dmsps?.map(
+                        (val: any) => (
+                          <p >
+                            {val.dmsp.dmsp_name}
+                          </p>
+                        )
+                      )}
                       <div className="product-content">
                         {products.listproduct[0].productdetails?.map(
                           (val: any) => (
@@ -246,7 +256,7 @@ function DetailProduct() {
                       nay chỉ còn 1.300.000đ
                     </p>
                     <hr />
-                    <h2 style={{color: 'red'}}>
+                    <h2 style={{ color: "red" }}>
                       {" "}
                       Lưu ý: Giá nâng cấp áp dụng trong 15 ngày đầu kể từ khi
                       quý khách mua máy.

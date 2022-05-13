@@ -12,6 +12,7 @@ function SlickCarouselHomePage(props: propsSlide) {
 
   const settings = {
     // dots: true,
+    arrows: true,
     infinite: true,
     slidesToShow: props.value.products.length > 1 ? 3 : 0,
     slidesToScroll: 1,
@@ -46,8 +47,8 @@ function SlickCarouselHomePage(props: propsSlide) {
     ],
     // autoplaySpeed: 2000,
     // cssEase: "linear",
-    // nextArrow: <SampleNextArrow />,
-    // prevArrow: <SamplePrevArrow />,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
   };
 
   return (

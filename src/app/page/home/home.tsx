@@ -18,6 +18,7 @@ function Home() {
     dispatch(getProductHomePage());
   }, []);
 
+
   const arrPrice = [
     { min_price: 2000000, max_price: 4000000 },
     { min_price: 4000000, max_price: 6000000 },
