@@ -7,6 +7,7 @@ import { productHomePageStore } from "../../commom/use-selector";
 import Banner from "../../component/customer/banner/banner";
 import Banner2 from "../../component/customer/banner/banner2";
 import BoxPrice from "../../component/customer/product/box-price/box-price";
+import SlickCarousel from "../../component/slickCarousel/slickCarouselFirm";
 import SlickCarouselProduct from "../../component/slickCarousel/slickCarouselProduct";
 import SlickDetailProduct from "../../component/slickCarousel/slickDetailProduct";
 import SlickCarouselHomePage from "../../component/slickCarousel/slickProductHomepage";
@@ -71,6 +72,47 @@ function Home() {
       <SlickCarouselProduct />
 
       <SlickCarouselProduct /> */}
+
+      {/* <SlickDetailProduct />
+
+      <div className="owl-carousel owl-theme">
+        <div className="item">
+          <h4>1</h4>
+        </div>
+        <div className="item">
+          <h4>2</h4>
+        </div>
+        <div className="item">
+          <h4>3</h4>
+        </div>
+        <div className="item">
+          <h4>4</h4>
+        </div>
+        <div className="item">
+          <h4>5</h4>
+        </div>
+        <div className="item">
+          <h4>6</h4>
+        </div>
+        <div className="item">
+          <h4>7</h4>
+        </div>
+        <div className="item">
+          <h4>8</h4>
+        </div>
+        <div className="item">
+          <h4>9</h4>
+        </div>
+        <div className="item">
+          <h4>10</h4>
+        </div>
+        <div className="item">
+          <h4>11</h4>
+        </div>
+        <div className="item">
+          <h4>12</h4>
+        </div>
+      </div> */}
     </div>
   );
 }

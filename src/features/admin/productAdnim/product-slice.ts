@@ -20,6 +20,7 @@ const initialState: CustomesProduct = {
   listproduct: [] as Array<Product>,
   total: 0,
   loading: false,
+  categoryname: "",
   error: false,
 };
 
@@ -60,9 +61,10 @@ const productSliceAdmin = createSlice({
         state.loading = true;
       })
       .addCase(getAllProductAdmin.fulfilled, (state, action) => {
-        const { result, total } = action.payload;
+        const { result, total, categoryname } = action.payload;
         state.listproduct = result;
         state.total = total;
+        state.categoryname = categoryname;
         state.loading = false;
         state.error = false;
       })

@@ -16423,10 +16423,6 @@ button:focus {
   display: none;
 }
 
-/* .banner > .slick-slide img{
-  height: 450px !important;
-  object-fit: cover !important;
-} */
 
 .banner > .slick-initialized .slick-slide {
   height: 470px !important;

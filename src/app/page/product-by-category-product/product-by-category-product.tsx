@@ -78,11 +78,12 @@ function ProductByCategoryProduct() {
                 className="toolbox-info"
                 style={{ fontSize: "18px", color: "#000", fontWeight: 600 }}
               >
-                {/* {
-                  category.listcategory.filter((e) => e.id === Number(ID))[0]
-                    ?.categoryname
-                } */}
-                Danh sách sản phẩm
+                {
+                  categoryproduct.listcategoryproduct.filter(
+                    (e) => e.id === Number(ID)
+                  )[0]?.dmsp_name
+                }
+                {/* Danh sách sản phẩm */}
               </div>
             </div>
 

@@ -13,7 +13,7 @@ function CategoryProduct(props: { value: CustomesCategoryProduct }) {
                 className="toolbox-info"
                 style={{ fontSize: "18px", color: "#000", fontWeight: 600 }}
               >
-                Danh mục
+                Danh mục sản phẩm
               </div>
             </div>
           </div>

@@ -42,6 +42,7 @@ export interface CustomesProduct {
   listproduct: Array<Product>;
   total: number;
   loading: boolean;
+  categoryname?: string;
   error: boolean;
 }
 

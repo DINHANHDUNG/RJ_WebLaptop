@@ -34,6 +34,11 @@ function DetailProduct() {
                       <figure className="product-main-image">
                         <Image
                           width={"100%"}
+                          id="product-zoom"
+                          data-zoom-image={
+                            "http://103.173.155.138:5500/images/" +
+                            products.listproduct[0]?.productimages[0]?.imagename
+                          }
                           // height={100}
                           src={
                             "http://103.173.155.138:5500/images/" +
@@ -53,8 +58,7 @@ function DetailProduct() {
                       <h1 className="product-title animate-charcter">
                         {products.listproduct[0].productname}
                       </h1>
-                      
-                      
+
                       <div
                         className="product-price"
                         style={{ justifyContent: "left" }}
@@ -71,9 +75,7 @@ function DetailProduct() {
 
                       {products.listproduct[0].product_dmsps?.map(
                         (val: any) => (
-                          <p >
-                            {val.dmsp.dmsp_name}
-                          </p>
+                          <p>{val.dmsp.dmsp_name}</p>
                         )
                       )}
                       <div className="product-content">
@@ -98,6 +100,60 @@ function DetailProduct() {
                     <BoxPromotion value={products.listproduct[0]} />
                   </div>
                 </div>
+
+                {/* <div className="row">
+                  <figure className="product-main-image">
+                    <img
+                      id="product-zoom"
+                      src={
+                        "http://103.173.155.138:5500/images/" +
+                        products.listproduct[0]?.productimages[0]?.imagename
+                      }
+                      data-zoom-image={
+                        "http://103.173.155.138:5500/images/" +
+                        products.listproduct[0]?.productimages[0]?.imagename
+                      }
+                      alt="product image"
+                    />
+
+                    <a
+                      href="#"
+                      id="btn-product-gallery"
+                      className="btn-product-gallery"
+                    >
+                      <i className="icon-arrows"></i>
+                    </a>
+                  </figure>
+
+                  <div
+                    id="product-zoom-gallery"
+                    className="product-image-gallery"
+                  >
+                    {products.listproduct[0].productimages
+                      .filter((val: any) => val.type != "1")
+                      ?.map((v: any) => (
+                        <a
+                          className="product-gallery-item active"
+                          href="#"
+                          data-image={
+                            "http://103.173.155.138:5500/images/" + v.imagename
+                          }
+                          data-zoom-image={
+                            "http://103.173.155.138:5500/images/" + v.imagename
+                          }
+                        >
+                          <img
+                            src={
+                              "http://103.173.155.138:5500/images/" +
+                              v.imagename
+                            }
+                            alt="product side"
+                          />
+                        </a>
+                      ))}
+                  </div>
+                </div> */}
+                
               </>
             ) : (
               <div className="row">Sản phẩm không tồn tại</div>

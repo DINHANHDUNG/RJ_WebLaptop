@@ -1,10 +1,14 @@
 import { Image } from "antd";
 import React from "react";
-
+import { Link } from "react-router-dom";
+import { ProductHomePage } from "../../types/product-home-page";
+interface propsSlide {
+  value: ProductHomePage;
+}
 function SlickDetailProduct() {
   return (
     <div
-      className=" owl-simple owl-nav-top carousel-equal-height carousel-with-shadow"
+      className="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
       data-toggle="owl"
       data-owl-options='{
         "nav": true, 
@@ -15,13 +19,13 @@ function SlickDetailProduct() {
         autoplay: false,
         "responsive": {
             "0": {
-                "items":1
+                "items":4
             },
             "480": {
-                "items":1
+                "items":4
             },
             "768": {
-                "items":3
+                "items":4
             },
             "1200": {
                 "items":4
@@ -29,29 +33,157 @@ function SlickDetailProduct() {
         }
     }'
     >
-      <Image
-        width={"100%"}
-        // height={100}
-        src={`https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg`}
-      />
+      <div className="product">
+        <figure className="product-media">
+          {/* <span className="product-label label-top">Top</span> */}
+          <Link to={"/detailproduct/" + 96}>
+            {/* <img
+            src="https://png.pngtree.com/png-clipart/20190117/ourlarge/pngtree-black-laptop-beautiful-laptop-hand-drawn-laptop-cartoon-laptop-png-image_417215.jpg"
+            alt="Product image"
+            className="product-image"
+          /> */}
 
-      <Image
-        width={"100%"}
-        // height={100}
-        src={`https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg`}
-      />
+            <img
+              src="http://103.173.155.138:5500/images/6261c3c87a784944a838e737c3752825.jpg"
+              alt="Product image"
+              className="product-image"
+            />
+          </Link>
+          {/* <Link to="/detailproduct/1"></Link> */}
+        </figure>
 
-      <Image
-        width={"100%"}
-        // height={100}
-        src={`https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg`}
-      />
+        <div className="product-body">
+          {/* <div className="product-cat">
+              <a href="#">Laptops</Link>
+            </div> */}
+          <h3 className="product-title">
+            <Link title={"Test"} to={"/detailproduct/" + 96}>
+              Test
+            </Link>
+          </h3>
+          <p className="product-describe">Test</p>
+          <div className="product-price">
+            10000000 VNĐ
+            {/* <span className="old-price">Giá cũ {props.value.price_origin} VNĐ</span> */}
+          </div>
+        </div>
 
-      <Image
-        width={"100%"}
-        // height={100}
-        src={`https://laptoptcc.com/wp-content/uploads/2020/08/AZZ04837-dell-inspiron-5410-laptoptcc-2048x1152.jpg`}
-      />
+        
+      </div>
+
+      <div className="product">
+        <figure className="product-media">
+          {/* <span className="product-label label-top">Top</span> */}
+          <Link to={"/detailproduct/" + 96}>
+            {/* <img
+            src="https://png.pngtree.com/png-clipart/20190117/ourlarge/pngtree-black-laptop-beautiful-laptop-hand-drawn-laptop-cartoon-laptop-png-image_417215.jpg"
+            alt="Product image"
+            className="product-image"
+          /> */}
+
+            <img
+              src="http://103.173.155.138:5500/images/6261c3c87a784944a838e737c3752825.jpg"
+              alt="Product image"
+              className="product-image"
+            />
+          </Link>
+          {/* <Link to="/detailproduct/1"></Link> */}
+        </figure>
+
+        <div className="product-body">
+          {/* <div className="product-cat">
+              <a href="#">Laptops</Link>
+            </div> */}
+          <h3 className="product-title">
+            <Link title={"Test"} to={"/detailproduct/" + 96}>
+              Test
+            </Link>
+          </h3>
+          <p className="product-describe">Test</p>
+          <div className="product-price">
+            10000000 VNĐ
+            {/* <span className="old-price">Giá cũ {props.value.price_origin} VNĐ</span> */}
+          </div>
+        </div>
+
+        
+      </div>
+
+      <div className="product">
+        <figure className="product-media">
+          {/* <span className="product-label label-top">Top</span> */}
+          <Link to={"/detailproduct/" + 96}>
+            {/* <img
+            src="https://png.pngtree.com/png-clipart/20190117/ourlarge/pngtree-black-laptop-beautiful-laptop-hand-drawn-laptop-cartoon-laptop-png-image_417215.jpg"
+            alt="Product image"
+            className="product-image"
+          /> */}
+
+            <img
+              src="http://103.173.155.138:5500/images/6261c3c87a784944a838e737c3752825.jpg"
+              alt="Product image"
+              className="product-image"
+            />
+          </Link>
+          {/* <Link to="/detailproduct/1"></Link> */}
+        </figure>
+
+        <div className="product-body">
+          {/* <div className="product-cat">
+              <a href="#">Laptops</Link>
+            </div> */}
+          <h3 className="product-title">
+            <Link title={"Test"} to={"/detailproduct/" + 96}>
+              Test
+            </Link>
+          </h3>
+          <p className="product-describe">Test</p>
+          <div className="product-price">
+            10000000 VNĐ
+            {/* <span className="old-price">Giá cũ {props.value.price_origin} VNĐ</span> */}
+          </div>
+        </div>
+
+        
+      </div>
+
+      <div className="product">
+        <figure className="product-media">
+          {/* <span className="product-label label-top">Top</span> */}
+          <Link to={"/detailproduct/" + 96}>
+            {/* <img
+            src="https://png.pngtree.com/png-clipart/20190117/ourlarge/pngtree-black-laptop-beautiful-laptop-hand-drawn-laptop-cartoon-laptop-png-image_417215.jpg"
+            alt="Product image"
+            className="product-image"
+          /> */}
+
+            <img
+              src="http://103.173.155.138:5500/images/6261c3c87a784944a838e737c3752825.jpg"
+              alt="Product image"
+              className="product-image"
+            />
+          </Link>
+          {/* <Link to="/detailproduct/1"></Link> */}
+        </figure>
+
+        <div className="product-body">
+          {/* <div className="product-cat">
+              <a href="#">Laptops</Link>
+            </div> */}
+          <h3 className="product-title">
+            <Link title={"Test"} to={"/detailproduct/" + 96}>
+              Test
+            </Link>
+          </h3>
+          <p className="product-describe">Test</p>
+          <div className="product-price">
+            10000000 VNĐ
+            {/* <span className="old-price">Giá cũ {props.value.price_origin} VNĐ</span> */}
+          </div>
+        </div>
+
+        
+      </div>
     </div>
   );
 }
