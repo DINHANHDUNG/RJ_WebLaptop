@@ -16374,10 +16374,8 @@ button:focus {
   padding: 0.8rem 0.2rem;
 }
 
-
-.animate-charcter
-{
-   text-transform: uppercase;
+.animate-charcter {
+  text-transform: uppercase;
   background-image: linear-gradient(
     -225deg,
     #231557 0%,
@@ -16403,19 +16401,38 @@ button:focus {
   }
 }
 
-
 .slick-next {
   top: -35px !important;
   right: 12px !important;
-  left: unset !important;;
+  left: unset !important;
 }
 
 .slick-prev {
   top: -35px !important;
   right: 40px !important;
-  left: unset !important;;
+  left: unset !important;
 }
 
-.slick-next:before, .slick-prev:before {
+.slick-next:before,
+.slick-prev:before {
   color: #000 !important;
+}
+
+.banner > .slick-next,
+.slick-prev {
+  display: none;
+}
+
+/* .banner > .slick-slide img{
+  height: 450px !important;
+  object-fit: cover !important;
+} */
+
+.banner > .slick-initialized .slick-slide {
+  height: 470px !important;
+  object-fit: cover !important;
+}
+
+.banner > .slick-slide {
+  padding: 0px !important;
 }

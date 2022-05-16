@@ -65,7 +65,7 @@ function SlickCarouselHomePage(props: propsSlide) {
       </h2>
       <Slider {...settings}>
         {props.value.products.map((e) => (
-          <div>
+          <div className="slide-home-page" style={{ margin: "10px" }}>
             <ItemProduct value={e} />
           </div>
         ))}

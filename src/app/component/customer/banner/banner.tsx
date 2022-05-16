@@ -8,6 +8,7 @@ function Banner() {
         data-toggle="owl"
         data-owl-options='{
                         "nav": false,
+                        "lazyLoad": false,
                         "responsive": {
                             "992": {
                                 "nav": true

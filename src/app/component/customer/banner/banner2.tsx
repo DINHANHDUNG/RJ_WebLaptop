@@ -1,39 +1,37 @@
+import { Image } from "antd";
 import React from "react";
-
-import banner7 from "../../../assets/images/banner/banner-7.jpg"
-import banner8 from "../../../assets/images/banner/banner-8.jpg"
+import Slider from "react-slick";
 function Banner2() {
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nav: false,
+    autoplay: true,
+    speed: 3000,
+    autoplaySpeed: 500,
+  };
   return (
-    <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-  <ol className="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div className="carousel-inner">
-    <div className="carousel-item active">
-      <img className="d-block w-100" src={banner7} alt="First slide" />
+    <div className="banner">
+      <Slider {...settings} >
+        <img
+          src="https://www.laptopdealer.vn/image/banner-1-ee.jpg"
+          alt=""
+          style={{ height: "100%", objectFit: "cover" }}
+        />
+        <img
+          src="https://theme.hstatic.net/200000251697/1000655457/14/smallbanner_img1.jpg?v=277"
+          alt=""
+          style={{ height: "100%", objectFit: "cover" }}
+        />
+        <img
+          src="https://tinhocmiennam.com/wp-content/uploads/2018/06/laptop-banner.jpg"
+          alt=""
+          style={{ height: "100%", objectFit: "cover" }}
+        />
+      </Slider>
     </div>
-    <div className="carousel-item">
-      <img className="d-block w-100" src={banner8} alt="Second slide" />
-    </div>
-
-    <div className="carousel-item">
-      <img className="d-block w-100" src={banner8} alt="Second slide" />
-    </div>
-    {/* <div className="carousel-item">
-      <img className="d-block w-100" src="assets/images/demos/demo-13/menu/3.jpg" alt="Third slide" />
-    </div> */}
-  </div>
-  <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span className="sr-only">Previous</span>
-  </a>
-  <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="sr-only">Next</span>
-  </a>
-</div>
   );
 }
 

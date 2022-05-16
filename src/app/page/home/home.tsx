@@ -5,6 +5,7 @@ import { getProductHomePage } from "../../../features/homepage";
 import { useAppDispatch, useAppSelector } from "../../commom/hooks";
 import { productHomePageStore } from "../../commom/use-selector";
 import Banner from "../../component/customer/banner/banner";
+import Banner2 from "../../component/customer/banner/banner2";
 import BoxPrice from "../../component/customer/product/box-price/box-price";
 import SlickCarouselProduct from "../../component/slickCarousel/slickCarouselProduct";
 import SlickDetailProduct from "../../component/slickCarousel/slickDetailProduct";
@@ -17,7 +18,6 @@ function Home() {
   useEffect(() => {
     dispatch(getProductHomePage());
   }, []);
-
 
   const arrPrice = [
     { min_price: 2000000, max_price: 4000000 },
@@ -42,7 +42,8 @@ function Home() {
 
   return (
     <div className="container">
-      <Banner />
+      {/* <Banner /> */}
+      <Banner2 />
       <br />
       <br />
 
@@ -57,6 +58,12 @@ function Home() {
       {products.listproducthomepage.map((val) =>
         val.products.length > 0 ? <SlickCarouselHomePage value={val} /> : null
       )}
+
+      <br />
+
+      {/* {products.listproducthomepage.map((val) =>
+        val.products.length > 0 ? <SlickCarouselProduct value={val} /> : null
+      )} */}
 
       <br />
       {/* <SlickCarouselProduct />

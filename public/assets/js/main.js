@@ -343,6 +343,7 @@ $(document).ready(function () {
 
         owlProductGallery.owlCarousel({
             loop: false,
+            lazyLoad: false,
             margin: 0,
             responsiveClass: true,
             nav: true,
