@@ -7797,12 +7797,14 @@ p {
 .banners-group {
   margin-bottom: 1.9rem;
 }
-.banner {
+
+
+/* .banner {
   display: block;
   position: relative;
   margin-bottom: 2rem;
   background-color: #ccc;
-}
+} */
 .banner > a {
   position: relative;
   display: block;
@@ -16425,10 +16427,21 @@ button:focus {
 
 
 .banner > .slick-initialized .slick-slide {
-  height: 470px !important;
+  max-height: 470px !important;
   object-fit: cover !important;
 }
 
 .banner > .slick-slide {
   padding: 0px !important;
+}
+
+@media screen and (max-width: 575px) {
+  .banner > .slick-initialized .slick-slide {
+    max-height: 128px !important;
+  }
+}
+@media (max-width: 340px) {
+  .banner > .slick-initialized .slick-slide {
+    max-height: 128px !important;
+  }
 }
