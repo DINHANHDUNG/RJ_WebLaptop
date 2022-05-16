@@ -1,5 +1,6 @@
 import { Image } from "antd";
 import React from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { ProductHomePage } from "../../types/product-home-page";
 import ItemProduct from "../customer/product/item-product/item-product";
@@ -60,16 +61,38 @@ function SlickCarouselHomePage(props: propsSlide) {
 
   return (
     <div>
-      <h2 className="title title-border" style={{ marginTop: "30px" }}>
+      <h2
+        className="title title-border"
+        style={{
+          marginTop: "30px",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         {props.value.categoryname}
+        <Link to={`danhmuc/${props.value.id}`} style={{ fontSize: "16px" }}>
+          Xem thêm
+        </Link>
       </h2>
-      <Slider {...settings}>
+
+      <div className="products mb-3">
+        <div className="row">
+          {props.value.products.slice(0, 8).map((value) => (
+            <div className="col-6 col-md-4 col-xl-3">
+              <ItemProduct value={value} />
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* <Slider {...settings}>
         {props.value.products.map((e) => (
           <div className="slide-home-page" style={{ margin: "10px" }}>
             <ItemProduct value={e} />
           </div>
         ))}
-      </Slider>
+      </Slider> */}
     </div>
   );
 }

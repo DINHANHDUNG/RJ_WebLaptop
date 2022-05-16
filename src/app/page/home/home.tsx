@@ -56,7 +56,7 @@ function Home() {
           </Col>
         ))}
       </Row>
-      {products.listproducthomepage.map((val) =>
+      {products.listproducthomepage.slice(0, 5).map((val) =>
         val.products.length > 0 ? <SlickCarouselHomePage value={val} /> : null
       )}
 
